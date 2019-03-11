@@ -1,0 +1,5 @@
+mutation CreateStudent($createCustomerInput: CreateCustomerInput!) {
+    createCustomer(createCustomerInput: $createCustomerInput) {
+        _id
+    }
+}

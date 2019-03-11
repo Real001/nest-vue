@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# IDE
+/.idea
+/.awcache
+/.vscode
+
+client/npm-debug.log
+client/yarn-error.log
+
+server/npm-debug.log
+server/yarn-error.log

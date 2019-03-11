@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "client-serve": "cd client && yarn serve",
+    "client-build": "cd client && yarn build",
+    "client-package": "cd client && yarn package",
+    "server-serve": "cd server && yarn start:dev",
+    "server-build": "cd server && yarn build",
+    "server-package": "cd server && yarn package",
+    "server-prod": "cd server && yarn start:prod",
+    "server-start": "cd server && yarn start:prod",
+    "gc": "git clean -dxfe .idea/",
+    "pre-commit": "yarn pre-commit:client && yarn pre-commit:server",
+    "pre-commit:client": "cd client && yarn pre-commit",
+    "pre-commit:server": "cd server && yarn pre-commit"
+  },
+  "gitHooks": {
+    "pre-commit": "yarn pre-commit"
+  },
+  "resolutions": {
+    "terser": "3.14.1"
+  }
+}

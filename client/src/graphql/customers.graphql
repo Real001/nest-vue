@@ -1,0 +1,11 @@
+query {
+  customers: getCustomers {
+    _id
+    firstName
+    lastName
+    email
+    phone
+    description
+    address
+  }
+}
