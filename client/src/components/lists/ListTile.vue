@@ -1,6 +1,6 @@
 <template>
   <v-list-tile @click="click">
-    <v-list-tile-action>
+    <v-list-tile-action v-if="icon">
       <v-icon>{{icon}}</v-icon>
     </v-list-tile-action>
     <v-list-tile-content>

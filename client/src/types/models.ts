@@ -28,6 +28,13 @@ export interface ConfigEditor {
 	pagePosition?: number;
 }
 
+export interface MenuGroup {
+	action?: string;
+	title: string;
+	active?: boolean;
+	items?: MenuGroup[];
+}
+
 export interface CursorPosotion {
   row: number;
   column: number;
