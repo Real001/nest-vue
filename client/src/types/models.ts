@@ -35,6 +35,11 @@ export interface MenuGroup {
 	items?: MenuGroup[];
 }
 
+export interface Select {
+	value: string;
+	label: string;
+}
+
 export interface CursorPosotion {
   row: number;
   column: number;
