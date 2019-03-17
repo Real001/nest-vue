@@ -8,23 +8,20 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import apolloClient from "./ApolloClient";
-
 Vue.config.productionTip = false;
-
 Vue.use(VueApollo);
 Vue.use(AceEditor);
 Vue.use(Vuetify, {
-	iconfont: 'md'
+    iconfont: 'md'
 });
-
 const apolloProvider = new VueApollo({
-  defaultClient: apolloClient
+    defaultClient: apolloClient
 });
-
 new Vue({
-  el: "#app",
-  apolloProvider,
-  router,
-  store,
-  render: h => h(App)
+    el: "#app",
+    apolloProvider,
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");
+//# sourceMappingURL=main.js.map

@@ -1,3 +1,5 @@
+export type ID = string;
+
 export interface Student {
   id?: ID;
   firstName: string;
@@ -10,4 +12,23 @@ export interface Student {
   updatedAt?: Date;
 }
 
-export type ID = string;
+export interface ConfigEditor {
+  lang?: string;
+  theme?: string;
+  readOnly?: boolean;
+	autoCompletion?: boolean;
+	showPrintMargin?: boolean;
+	useWrapMode?: boolean;
+	useSoftTabs?: boolean;
+	tabSize?: number;
+	useVim?: boolean;
+	useEmmet?: boolean;
+	useBeautifyCode?: boolean;
+	cursorPosition?: CursorPosotion;
+	pagePosition?: number;
+}
+
+export interface CursorPosotion {
+  row: number;
+  column: number;
+}
