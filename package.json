@@ -6,7 +6,10 @@
       "client",
       "server"
     ],
-    "nohoist": []
+    "nohoist": [
+      "**/vuetify",
+      "**/material-design-icons-iconfont"
+    ]
   },
   "scripts": {
     "client-serve": "cd client && yarn serve",
@@ -17,13 +20,7 @@
     "server-package": "cd server && yarn package",
     "server-prod": "cd server && yarn start:prod",
     "server-start": "cd server && yarn start:prod",
-    "gc": "git clean -dxfe .idea/",
-    "pre-commit": "yarn pre-commit:client && yarn pre-commit:server",
-    "pre-commit:client": "cd client && yarn pre-commit",
-    "pre-commit:server": "cd server && yarn pre-commit"
-  },
-  "gitHooks": {
-    "pre-commit": "yarn pre-commit"
+    "gc": "git clean -dxfe .idea/"
   },
   "resolutions": {
     "terser": "3.14.1"
