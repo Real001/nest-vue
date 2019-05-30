@@ -4,20 +4,58 @@
       <h2>Create student</h2>
       <apollo-mutation
         :mutation="require('@/graphql/createStudent.graphql')"
-        :variables="{createCustomerInput: student}"
+        :variables="{ createCustomerInput: student }"
       >
-        <template slot-scope="{ mutate, loading, error }">
-      <form id="create-post-form">
-        <v-input title="First Name" name="firstName" placeholder="First Name" v-model="student.firstName" />
-        <v-input title="Last Name" name="lastName" placeholder="Last Name" v-model="student.lastName" />
-        <v-input title="Email" name="email" placeholder="Email" v-model="student.email" type="email" />
-        <v-input title="Phone " name="phone" placeholder="Phone " v-model="student.phone" />
-        <v-input title="Address" name="address" placeholder="Address" v-model="student.address" />
-        <v-input title="Description" name="description" placeholder="Description" v-model="student.description" />
-        <div class="form-group col-md-4 pull-right">
-          <button class="btn btn-success" type="submit" :disabled="loading" @click="mutate()"> Create student </button>
-        </div>
-      </form>
+        <template slot-scope="{ mutate, loading }">
+          <form id="create-post-form">
+            <v-input
+              title="First Name"
+              name="firstName"
+              placeholder="First Name"
+              v-model="student.firstName"
+            />
+            <v-input
+              title="Last Name"
+              name="lastName"
+              placeholder="Last Name"
+              v-model="student.lastName"
+            />
+            <v-input
+              title="Email"
+              name="email"
+              placeholder="Email"
+              v-model="student.email"
+              type="email"
+            />
+            <v-input
+              title="Phone "
+              name="phone"
+              placeholder="Phone "
+              v-model="student.phone"
+            />
+            <v-input
+              title="Address"
+              name="address"
+              placeholder="Address"
+              v-model="student.address"
+            />
+            <v-input
+              title="Description"
+              name="description"
+              placeholder="Description"
+              v-model="student.description"
+            />
+            <div class="form-group col-md-4 pull-right">
+              <button
+                class="btn btn-success"
+                type="submit"
+                :disabled="loading"
+                @click="mutate()"
+              >
+                Create student
+              </button>
+            </div>
+          </form>
         </template>
       </apollo-mutation>
     </div>
@@ -25,23 +63,21 @@
 </template>
 
 <script lang="ts">
-  import { Vue, Component } from 'vue-property-decorator';
-  import vInput from '@/components/inputs/Input.vue';
-	import { Student } from "@/types/models";
+import { Vue, Component } from "vue-property-decorator";
+import vInput from "@/components/inputs/Input.vue";
+import { Student } from "@/types/models";
 
-  @Component({ components: { vInput } })
-  export default class Create extends Vue {
-  	public student: Student = {
-			firstName: '',
-			lastName: '',
-			email: '',
-			phone: '',
-			address: '',
-			description: ''
-    };
-  }
+@Component({ components: { vInput } })
+export default class Create extends Vue {
+  public student: Student = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    description: ""
+  };
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

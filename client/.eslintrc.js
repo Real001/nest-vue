@@ -15,6 +15,6 @@ module.exports = {
       parser: "@typescript-eslint/parser"
     },
 
-    plugins: ["graphql"]
+    plugins: ["graphql", "html"]
   }
 };

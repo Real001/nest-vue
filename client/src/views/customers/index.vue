@@ -11,7 +11,7 @@
           <div v-if="data.customers.length === 0">
             <h2>No customer found at the moment</h2>
           </div>
-         <customer-table :customers="data.customers" />
+          <customer-table :customers="data.customers" />
         </template>
       </apollo-query>
     </div>
