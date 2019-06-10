@@ -4,7 +4,7 @@ export class CreateCustomerInput {
     lastName: string;
     email: string;
     phone: string;
-    address: string;
+    group: string;
     description?: string;
 }
 
@@ -14,7 +14,7 @@ export class Customer {
     lastName?: string;
     email?: string;
     phone?: string;
-    address?: string;
+    group?: string;
     description?: string;
     createdAt?: Date;
     updatedAt?: Date;

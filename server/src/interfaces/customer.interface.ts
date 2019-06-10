@@ -5,7 +5,7 @@ export interface Customer extends Document {
     readonly lastName: string;
     readonly email: string;
     readonly phone: string;
-    readonly address: string;
+    readonly group: string;
     readonly description: string;
     readonly createdAt: Date;
     readonly updatedAt: Date;

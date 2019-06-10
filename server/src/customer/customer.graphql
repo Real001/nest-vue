@@ -17,7 +17,7 @@ type Customer {
   lastName: String
   email: String
   phone: String
-  address: String
+  group: ID
   description: String,
   createdAt: Date
   updatedAt: Date
@@ -28,7 +28,7 @@ input CreateCustomerInput {
   lastName: String!
   email: String!
   phone: String!
-  address: String!
+  group: ID!
   description: String,
 }
 

@@ -5,7 +5,7 @@ export const CustomerSchema = new Schema({
     lastName: String,
     email: String,
     phone: String,
-    address: String,
+    group: String,
     description: String,
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
