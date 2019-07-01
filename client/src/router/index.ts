@@ -1,7 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Customers from "../views/customers/index.vue";
-import CustomerCreate from "../views/customers/Create.vue";
+import Customers from "../modules/customers/index.vue";
+import CustomerCreate from "../modules/customers/Create.vue";
+import Editor from '../modules/editor/index.vue';
+import Login from '../modules/login/index.vue'
 
 Vue.use(Router);
 
@@ -14,6 +16,11 @@ export default new Router({
       redirect: { name: "customers" }
     },
     {
+      path: '/login',
+      name: 'login',
+      component: Login,
+    },
+    {
       path: "/customers",
       name: "customers",
       component: Customers
@@ -22,6 +29,11 @@ export default new Router({
       path: "/customers/create",
       name: "createCustomer",
       component: CustomerCreate
+    },
+    {
+      path: "/ide",
+      name: "IDE",
+      component: Editor
     }
   ]
 });
