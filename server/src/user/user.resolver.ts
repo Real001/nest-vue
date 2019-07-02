@@ -1,18 +1,18 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
-import { CustomerService } from './customer.service';
-import { CustomerGuard } from './customer.guard';
+import { UserService } from './customer.service';
+import { UserGuard } from './customer.guard';
 import { ID } from '../interfaces/common.interface';
-import { CreateCustomerDTO } from './dto/create-customer.dto';
-import { Customer } from "../interfaces/customer.interface";
+import { CreateCustomerDTO } from './dto/create-user.dto';
+import { Customer } from "../interfaces/user.interface";
 
 const pubSub = new PubSub();
 
 @Resolver('Customer')
-export class CustomerResolver {
-	constructor(private readonly customerService: CustomerService) {}
-  @UseGuards(CustomerGuard)
+export class UserResolver {
+	constructor(private readonly customerService: UserService) {}
+  @UseGuards(UserGuard)
 
 	@Query('getCustomers')
 	async getCustomers(): Promise<Customer[]> {

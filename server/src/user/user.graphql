@@ -1,17 +1,17 @@
 scalar Date
 
 type Query {
-  getCustomers: [Customer]
-  customer(_id: ID!): Customer
+  getUsers: [Customer]
+  user(_id: ID!): Customer
 }
 
 type Mutation {
-  createCustomer(createCustomerInput: CreateCustomerInput!): Customer
-  updateCustomer(_id: ID!, createCustomerInput: CreateCustomerInput): Customer
-  deleteCustomer(_id: ID!): Customer
+  createUser(createUserInput: CreateuserInput!): User
+  updateUser(_id: ID!, createUserInput: CreateUserInput): user
+  deleteUser(_id: ID!): Customer
 }
 
-type Customer {
+type User {
   _id: ID!
   firstName: String
   lastName: String
@@ -23,7 +23,7 @@ type Customer {
   updatedAt: Date
 }
 
-input CreateCustomerInput {
+input CreateUserInput {
   firstName: String!
   lastName: String!
   email: String!
@@ -33,6 +33,6 @@ input CreateCustomerInput {
 }
 
 type Subscription {
-  customerCreated: Customer
+  userCreated: User
 }
 

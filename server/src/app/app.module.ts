@@ -5,8 +5,8 @@ import { MongoClient } from 'mongodb';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CustomerService } from '../customer/customer.service';
-import { CustomerModule } from '../customer/customer.module';
+import { UserService } from '../user/customer.service';
+import { UserModule } from '../user/user.module';
 import { DateScalar } from '../common/scalars/date.scalar';
 import { ConfigModule } from '../config/config.module';
 
@@ -22,9 +22,9 @@ import { ConfigModule } from '../config/config.module';
       },
     }),
     AppService,
-    CustomerModule,
+    UserModule,
     ConfigModule,
   ],
-  providers: [DateScalar, CustomerService, ],
+  providers: [DateScalar, UserService, ],
 })
 export class AppModule {}
