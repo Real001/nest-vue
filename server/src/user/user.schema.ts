@@ -10,6 +10,6 @@ export const UserSchema = new Schema({
   avatar: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  hashPassword: String,
+  hash: String,
   password: String,
 });

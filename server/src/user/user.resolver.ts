@@ -1,40 +1,41 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
-import { UserService } from './customer.service';
-import { UserGuard } from './customer.guard';
+import { UserService } from './user.service';
+import { UserGuard } from './user.guard';
 import { ID } from '../interfaces/common.interface';
-import { CreateCustomerDTO } from './dto/create-user.dto';
-import { Customer } from "../interfaces/user.interface";
+import { CreateUserDTO } from './dto/create-user.dto';
+import { User } from "../interfaces/user.interface";
 
 const pubSub = new PubSub();
 
-@Resolver('Customer')
+@Resolver('User')
 export class UserResolver {
-	constructor(private readonly customerService: UserService) {}
+	constructor(private readonly usersService: UserService) {}
   @UseGuards(UserGuard)
 
-	@Query('getCustomers')
-	async getCustomers(): Promise<Customer[]> {
-		return await this.customerService.findAll();
+	@Query('getUsers')
+	async getUsers(): Promise<User[]> {
+		return await this.usersService.findAll();
 	}
 
-  @Query('customer')
-  async customer(@Args('_id') _id: ID): Promise<Customer> {
-    return await this.customerService.findOneById(_id);
+  @Query('user')
+  async user(@Args('_id') _id: ID): Promise<User> {
+    return await this.usersService.findOneById(_id);
   }
 
-  @Mutation('createCustomer')
-  async create(@Args('createCustomerInput') args: CreateCustomerDTO): Promise<Customer> {
-	  const createCustomer = await this.customerService.create(args);
-		pubSub.publish('customerCreated', { customerCreated: createCustomer });
-		return createCustomer;
+  @Mutation('createUser')
+  async create(@Args('createUser') args: CreateUserDTO): Promise<User> {
+		console.log(args)
+	  const createUser = await this.usersService.create(args);
+		pubSub.publish('userCreated', { customerCreated: createUser });
+		return createUser;
   }
 
-	@Subscription('customerCreated')
+	@Subscription('userCreated')
 	customerCreated() {
 		return {
-			subscribe: () => pubSub.asyncIterator('customerCreated'),
+			subscribe: () => pubSub.asyncIterator('userCreated'),
 		};
 	}
 }

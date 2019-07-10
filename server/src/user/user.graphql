@@ -1,14 +1,14 @@
 scalar Date
 
 type Query {
-  getUsers: [Customer]
-  user(_id: ID!): Customer
+  getUsers: [User]
+  user(_id: ID!): User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateuserInput!): User
-  updateUser(_id: ID!, createUserInput: CreateUserInput): user
-  deleteUser(_id: ID!): Customer
+  createUser(createUserInput: CreateUserInput!): User
+  updateUser(_id: ID!, createUserInput: CreateUserInput): User
+  deleteUser(_id: ID!): User
 }
 
 type User {
@@ -27,9 +27,9 @@ input CreateUserInput {
   firstName: String!
   lastName: String!
   email: String!
-  phone: String!
   group: ID!
   description: String,
+  password: String!,
 }
 
 type Subscription {

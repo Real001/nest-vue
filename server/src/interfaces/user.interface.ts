@@ -11,4 +11,5 @@ export interface User extends Document {
     readonly createdAt: Date;
     readonly updatedAt: Date;
     readonly password: string;
+    hash: string;
 }

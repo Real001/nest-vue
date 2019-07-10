@@ -5,6 +5,6 @@ export class CreateUserDTO {
 	readonly phone: string;
 	readonly group: string;
 	readonly description: string;
-	readonly createdAt: Date;
-	readonly updatedAt: Date;
+	password: string;
+  hash: string;
 }

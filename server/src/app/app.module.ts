@@ -5,10 +5,11 @@ import { MongoClient } from 'mongodb';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserService } from '../user/customer.service';
+import { UserService } from '../user/user.service';
 import { UserModule } from '../user/user.module';
 import { DateScalar } from '../common/scalars/date.scalar';
 import { ConfigModule } from '../config/config.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +25,8 @@ import { ConfigModule } from '../config/config.module';
     AppService,
     UserModule,
     ConfigModule,
+    AuthModule,
+
   ],
   providers: [DateScalar, UserService, ],
 })
