@@ -1,5 +1,5 @@
 query {
-  customers: getCustomers {
+  customers: getUsers {
     _id
     firstName
     lastName

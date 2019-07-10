@@ -44,3 +44,7 @@ export interface CursorPosotion {
   row: number;
   column: number;
 }
+
+export interface SettingsIDE {
+	language: string;
+}

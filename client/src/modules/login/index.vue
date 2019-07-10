@@ -6,7 +6,6 @@
   >
     <v-text-field
       v-model="email"
-      :rules="emailRules"
       label="E-mail"
       required
     />
@@ -31,4 +30,9 @@
 
 <script lang="ts">
   import { Vue, Component } from 'vue-property-decorator';
+
+  @Component
+  export default class Login extends Vue {
+
+  }
 </script>
