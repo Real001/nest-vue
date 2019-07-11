@@ -10,20 +10,34 @@
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>IDE</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>notifications</v-icon>
+      </v-btn>
+      <v-btn icon large>
+        <v-avatar size="32px" tile>
+          <img :src="user.avatarUrl" :alt="fullName" />
+        </v-avatar>
+      </v-btn>
     </v-toolbar>
-    <settings :dialog="dialog" />
+    <settings :dialog="dialog" :config="config"/>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import ListTile from '@/components/lists/ListTile.vue';
 import ListGroup from '@/components/lists/ListGroup.vue';
 import Settings from './Settings.vue';
 import { MenuGroup } from '@/types/models';
+import { User } from '@/types/models';
+import { ConfigEditor } from '@/types/models';
 
 @Component({ components: { ListTile, ListGroup, Settings } })
 export default class NavigationIDE extends Vue {
+  @Prop() public user!: User;
+  @Prop() public config!: ConfigEditor;
+
   public drawer: string | null = null;
   public menuCode: MenuGroup[] = [
     {
@@ -40,6 +54,13 @@ export default class NavigationIDE extends Vue {
 
   public openSettings() {
     this.dialog = true;
+  }
+
+  public get fullName() {
+    if (this.user) {
+      return `${this.user.firstName} ${this.user.lastName}`;
+    }
+    return '';
   }
 }
 </script>

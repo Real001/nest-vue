@@ -10,6 +10,8 @@ import { UserModule } from '../user/user.module';
 import { DateScalar } from '../common/scalars/date.scalar';
 import { ConfigModule } from '../config/config.module';
 import { AuthModule } from '../auth/auth.module';
+import { IdeModule } from '../ide/ide.module';
+import { IdeService } from '../ide/ide.service';
 
 @Module({
   imports: [
@@ -24,10 +26,10 @@ import { AuthModule } from '../auth/auth.module';
     }),
     AppService,
     UserModule,
+    IdeModule,
     ConfigModule,
     AuthModule,
-
-  ],
-  providers: [DateScalar, UserService, ],
+      ],
+  providers: [DateScalar, UserService, IdeService],
 })
 export class AppModule {}

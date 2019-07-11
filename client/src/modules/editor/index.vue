@@ -1,6 +1,6 @@
 <template>
   <v-app id="editor" dark>
-    <navigation-i-d-e />
+    <navigation-i-d-e :user="user" :config="config"/>
     <v-content>
       <v-container fluid fill-height>
         <ace-editor v-model="code" :config="config" />
@@ -11,16 +11,27 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { ConfigEditor } from '@/types/models';
+import { Getter } from 'vuex-class';
+import { ConfigEditor, User } from '@/types/models';
 import NavigationIDE from './_components/NavigationIDE.vue';
+import QUERY_SETTINGS from './_graphql/querySettings.gql'
 
 @Component({ components: { NavigationIDE } })
 export default class EditorPage extends Vue {
+  @Getter('user', { namespace: 'auth' }) public user!: User;
+
   private code: string = 'jjkhjl';
-  private config: ConfigEditor = {
-    lang: 'javascript',
-    theme: 'monokai',
-  };
+
+  private get config() {
+    const config = this.$apollo.query({
+      query: QUERY_SETTINGS,
+      variables: {
+        user:this.user._id
+      }
+    });
+    console.log(config)
+    return null;
+  }
 }
 </script>
 

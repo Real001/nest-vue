@@ -1,0 +1,12 @@
+type Query {
+  settings(user: String!): Settings
+}
+
+type Ide {
+  settings(user: String!): Settings
+}
+
+type Settings {
+  lang: String!
+  theme: String!
+}

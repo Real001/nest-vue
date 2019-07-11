@@ -1,7 +1,7 @@
 export type ID = string;
 
 export interface User {
-  id?: ID;
+  _id?: ID;
   firstName: string;
   lastName: string;
   email: string;

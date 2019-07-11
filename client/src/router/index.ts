@@ -15,7 +15,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: { name: 'login' },
+      redirect: { name: 'ide' },
     },
     {
       path: '/login',
@@ -42,7 +42,7 @@ const router = new Router({
     },
     {
       path: '/ide',
-      name: 'IDE',
+      name: 'ide',
       component: Editor,
       meta: {
         isAuth: true,

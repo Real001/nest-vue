@@ -8,6 +8,10 @@ export class CreateUserInput {
     password: string;
 }
 
+export class Ide {
+    settings?: Settings;
+}
+
 export abstract class IMutation {
     abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 
@@ -17,11 +21,18 @@ export abstract class IMutation {
 }
 
 export abstract class IQuery {
+    abstract settings(user: string): Settings | Promise<Settings>;
+
     abstract getUsers(): User[] | Promise<User[]>;
 
     abstract user(_id: string): User | Promise<User>;
 
     abstract temp__(): boolean | Promise<boolean>;
+}
+
+export class Settings {
+    lang: string;
+    theme: string;
 }
 
 export abstract class ISubscription {

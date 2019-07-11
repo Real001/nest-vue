@@ -38,11 +38,9 @@ import { Select } from '@/types/models';
 @Component
 export default class Settings extends Vue {
   @Prop({ type: Boolean, default: false }) public dialog!: boolean;
+  @Prop() public config!: ConfigEditor;
+
   public languages: Select[] = LANGUAGES;
-  private config: ConfigEditor = {
-    lang: 'javascript',
-    theme: 'monokai',
-  };
 }
 </script>
 
