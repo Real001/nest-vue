@@ -11,6 +11,5 @@ export default {
       return settings;
     }
     return null;
-  }
-
-} as TypedGettersTree<SettingsIDEState, SettingsIDEGetters>
+  },
+} as TypedGettersTree<SettingsIDEState, SettingsIDEGetters>;

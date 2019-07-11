@@ -63,19 +63,19 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-import vInput from "@/components/inputs/Input.vue";
-import { Student } from "@/types/models";
+import { Vue, Component } from 'vue-property-decorator';
+import vInput from '@/components/inputs/Input.vue';
+import { User } from '@/types/models';
 
 @Component({ components: { vInput } })
 export default class Create extends Vue {
-  public student: Student = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    address: "",
-    description: ""
+  public student: User = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    description: '',
+    group: '',
+    role: 'user',
   };
 }
 </script>

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from  '@nestjs/jwt';
 import { UserService } from  '../user/user.service';
 import { User } from '../interfaces/user.interface';
+import { ID } from '../interfaces/common.interface';
 
 @Injectable()
 export class AuthService {
@@ -19,12 +20,11 @@ export class AuthService {
       if (!userData) {
         return {status: 404};
       }
-      let payload = `${userData.firstName}${userData.lastName}${userData.id}`;
+      let payload = `${userData.id}`;
       const accessToken = this.jwtService.sign(payload);
       return {
         expires_in: 3600,
         access_token: accessToken,
-        user_id: payload,
         status: 200
       }
     })
@@ -32,5 +32,10 @@ export class AuthService {
 
   public async register(user: User): Promise<any> {
     return this.userService.create(user);
+  }
+
+  public async me(token) {
+    const idUser = await this.jwtService.decode(token) as ID;
+    return this.userService.findOneById(idUser);
   }
 }
