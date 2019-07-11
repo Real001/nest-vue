@@ -4,7 +4,7 @@ import getters from './getters';
 
 const state: SettingsIDEState = {
   settings: {
-    language:'javascript'
+    language: 'javascript',
   },
   error: null,
 };
@@ -13,4 +13,4 @@ export default {
   namespaced: true,
   state,
   getters,
-} as Module<SettingsIDEState, RootState>
+} as Module<SettingsIDEState, RootState>;

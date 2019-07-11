@@ -42,14 +42,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from "vue-property-decorator";
-import { Student, ID } from "@/types/models";
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
+import { User, ID } from '@/types/models';
 
 @Component
 export default class CustomersTable extends Vue {
-  @Prop() public customers!: Student[];
+  @Prop() public customers!: User[];
 
-  @Emit("delete")
+  @Emit('delete')
   public deleteCustomer(id: ID) {
     return id;
   }

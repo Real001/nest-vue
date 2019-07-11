@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-import CustomerTable from "./components/CustomersTable.vue";
+import { Vue, Component } from 'vue-property-decorator';
+import CustomerTable from './components/CustomersTable.vue';
 
 @Component({ components: { CustomerTable } })
 export default class CustomersPage extends Vue {}
