@@ -8,7 +8,7 @@
       no-action
     >
       <template v-slot:activator>
-        <list-tile :title="item.title" @click="" />
+        <list-tile :title="item.title" />
       </template>
 
       <list-tile
@@ -16,7 +16,6 @@
         :key="subItem.title"
         :title="subItem.title"
         :icon="subItem.action"
-        @click=""
       />
     </v-list-group>
   </div>

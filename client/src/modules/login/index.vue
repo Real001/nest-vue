@@ -14,14 +14,20 @@
                 label="E-mail"
                 type="email"
                 v-model="email"
+                required
+                :rules="[rules.required, rules.email]"
               >
               </v-text-field>
               <v-text-field
                 id="password"
                 prepend-icon="lock"
                 v-model="password"
+                dfsf
                 label="Password"
                 type="password"
+                :error-messages="errorServer"
+                :rules="[rules.required]"
+                required
               >
               </v-text-field>
             </v-form>
@@ -39,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { Action, State } from 'vuex-class';
 import { LoginData } from '@/types/models';
 
@@ -53,9 +59,33 @@ export default class Login extends Vue {
 
   public email: string = '';
   public password: string = '';
+  public rules = {
+    required: (value: string) => !!value || 'Required.',
+    email: (value: string) => {
+      const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return pattern.test(value) || 'Invalid e-mail.';
+    },
+  };
+  public errorServer: string = '';
 
-  public async submitLogin() {
-    await this.login({ email: this.email, password: this.password });
+  @Watch('email')
+  public emailEdit() {
+    this.errorServer = '';
+  }
+
+  @Watch('password')
+  public passwordEdit() {
+    this.errorServer = '';
+  }
+
+  public submitLogin() {
+    this.login({ email: this.email, password: this.password }).then(() => {
+      if (this.error) {
+        this.errorServer = this.error.message;
+      } else {
+        this.$router.push('/ide');
+      }
+    });
   }
 }
 </script>
