@@ -16,7 +16,6 @@ export class UserService {
 		try {
       createUserDTO.hash = await this.getHash(createUserDTO.password);
       createUserDTO.password = undefined;
-      console.log(createUserDTO)
       const newUser = await this.UserModel(createUserDTO);
       return newUser.save();
     } catch (e) {
@@ -37,6 +36,10 @@ export class UserService {
 		return await this.UserModel.find().exec();
 	}
 
+  async findOne(find: object): Promise<User> {
+    return await this.UserModel.findOne(find).exec();
+  }
+
 	async findOneById(id: ID): Promise<User> {
 		return await this.UserModel.findById(id).exec();
 	}
@@ -48,4 +51,8 @@ export class UserService {
   async getHash(password: string|undefined): Promise<string> {
     return bcrypt.hash(password, this.saltRounds);
   }
+
+  async checPassword(password: string, hash: string): Promise<boolean> {
+		return await bcrypt.compare(password, hash);
+	}
 }

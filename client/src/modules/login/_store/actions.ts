@@ -27,7 +27,7 @@ export default {
     });
   },
   async login({ commit, dispatch, state }, data: LoginData) {
-    await executeSafe({
+    return await executeSafe({
       commit,
       mutations: {
         start: LOGIN_START,
@@ -36,14 +36,17 @@ export default {
       },
       action: async () => {
         const response = (await login(data)) as any;
-        cookie.set('access_token', response.data.access_token, {
-          expires: response.data.expires_in / 60 / 60 / 24,
-        });
+        if (response.access_token) {
+          cookie.set('access_token', response.data.access_token, {
+            expires: response.data.expires_in / 60 / 60 / 24,
+          });
+        }
+
+        if (state.loginError === null) {
+          await dispatch('loadUser');
+        }
       },
     });
-    if (state.loginError === null) {
-      await dispatch('loadUser');
-    }
   },
   async logout({ commit }) {
     await executeSafe({
