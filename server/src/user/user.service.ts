@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { JwtService } from  '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { User } from '../interfaces/user.interface';
@@ -10,14 +11,24 @@ import { ID } from '../interfaces/common.interface';
 export class UserService {
   private saltRounds = 10;
 
-	constructor(@InjectModel('User') private readonly UserModel: Model<User>) { }
+	constructor(
+		@InjectModel('User') private readonly UserModel: Model<User>,
+  	private readonly jwtService: JwtService
+	) { }
 
-	async create(createUserDTO: CreateUserDTO): Promise<User> {
+	async create(createUserDTO: CreateUserDTO): Promise<any> {
 		try {
       createUserDTO.hash = await this.getHash(createUserDTO.password);
       createUserDTO.password = undefined;
       const newUser = await this.UserModel(createUserDTO);
-      return newUser.save();
+      newUser.save();
+      let payload = `${newUser._id}`;
+      const accessToken = this.jwtService.sign(payload);
+      return {
+        expires_in: 3600,
+        access_token: accessToken,
+        status: 200
+      }
     } catch (e) {
 			console.error(e.message)
     }
@@ -52,7 +63,8 @@ export class UserService {
     return bcrypt.hash(password, this.saltRounds);
   }
 
-  async checPassword(password: string, hash: string): Promise<boolean> {
+  async checkPassword(password: string, hash: string): Promise<boolean> {
+		console.log(password, hash)
 		return await bcrypt.compare(password, hash);
 	}
 }

@@ -6,6 +6,7 @@ import Customers from '../modules/customers/index.vue';
 import CustomerCreate from '../modules/customers/Create.vue';
 import Editor from '../modules/editor/index.vue';
 import Login from '../modules/login/index.vue';
+const Register = () => import('../modules/register/index.vue');
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ const router = new Router({
     {
       path: '/',
       redirect: { name: 'login' },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
     },
     {
       path: '/login',
@@ -42,7 +48,7 @@ const router = new Router({
     },
     {
       path: '/ide',
-      name: 'IDE',
+      name: 'ide',
       component: Editor,
       meta: {
         isAuth: true,
