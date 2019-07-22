@@ -33,6 +33,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
+            <a href="/register">Sign up</a>
             <v-spacer></v-spacer>
             <v-btn color="warning" @click="submitLogin">
               Login
@@ -48,6 +49,7 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { Action, State } from 'vuex-class';
 import { LoginData } from '@/types/models';
+import { validEmail } from '@/helpers/validation';
 
 const opt = { namespace: 'auth' };
 
@@ -62,8 +64,7 @@ export default class Login extends Vue {
   public rules = {
     required: (value: string) => !!value || 'Required.',
     email: (value: string) => {
-      const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return pattern.test(value) || 'Invalid e-mail.';
+      return validEmail(value);
     },
   };
   public errorServer: string = '';
@@ -83,7 +84,7 @@ export default class Login extends Vue {
       if (this.error) {
         this.errorServer = this.error.message;
       } else {
-        this.$router.push('/ide');
+        this.$router.push({ name: 'ide' });
       }
     });
   }

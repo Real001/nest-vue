@@ -6,19 +6,25 @@ type Query {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User
+  createUser(createUserInput: CreateUserInput!): Token
   updateUser(_id: ID!, createUserInput: CreateUserInput): User
   deleteUser(_id: ID!): User
 }
 
+type Token {
+  expires_in: String
+  access_token: String
+  status: Int
+}
+
 type User {
   _id: ID!
-  firstName: String
-  lastName: String
-  email: String
-  phone: String
-  group: ID
+  firstName: String!
+  lastName: String!
+  email: String!
+  group: ID!
   description: String,
+  avatarUrl: String,
   createdAt: Date
   updatedAt: Date
 }
@@ -30,6 +36,8 @@ input CreateUserInput {
   group: ID!
   description: String,
   password: String!,
+  avatarUrl: String
+  role: String
 }
 
 type Subscription {
