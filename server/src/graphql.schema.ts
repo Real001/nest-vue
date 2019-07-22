@@ -6,6 +6,8 @@ export class CreateUserInput {
     group: string;
     description?: string;
     password: string;
+    avatarUrl?: string;
+    role?: string;
 }
 
 export class Ide {
@@ -13,7 +15,7 @@ export class Ide {
 }
 
 export abstract class IMutation {
-    abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
+    abstract createUser(createUserInput: CreateUserInput): Token | Promise<Token>;
 
     abstract updateUser(_id: string, createUserInput?: CreateUserInput): User | Promise<User>;
 
@@ -37,6 +39,12 @@ export class Settings {
 
 export abstract class ISubscription {
     abstract userCreated(): User | Promise<User>;
+}
+
+export class Token {
+    expires_in?: string;
+    access_token?: string;
+    status?: number;
 }
 
 export class User {

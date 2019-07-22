@@ -11,6 +11,7 @@ export interface User {
   avatarUrl?: string;
   role: string;
   group: string;
+  password: string;
 }
 
 export interface LoginData {
@@ -53,4 +54,12 @@ export interface CursorPosotion {
 
 export interface SettingsIDE {
   language: string;
+}
+
+export interface LoginResponse {
+  createUser: {
+    access_token: string;
+    expires_in: number;
+    status: number;
+  };
 }

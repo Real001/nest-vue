@@ -14,19 +14,26 @@
                 label="E-mail"
                 type="email"
                 v-model="email"
+                required
+                :rules="[rules.required, rules.email]"
               >
               </v-text-field>
               <v-text-field
                 id="password"
                 prepend-icon="lock"
                 v-model="password"
+                dfsf
                 label="Password"
                 type="password"
+                :error-messages="errorServer"
+                :rules="[rules.required]"
+                required
               >
               </v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
+            <a href="/register">Sign up</a>
             <v-spacer></v-spacer>
             <v-btn color="warning" @click="submitLogin">
               Login
@@ -39,9 +46,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { Action, State } from 'vuex-class';
 import { LoginData } from '@/types/models';
+import { validEmail } from '@/helpers/validation';
 
 const opt = { namespace: 'auth' };
 
@@ -53,9 +61,32 @@ export default class Login extends Vue {
 
   public email: string = '';
   public password: string = '';
+  public rules = {
+    required: (value: string) => !!value || 'Required.',
+    email: (value: string) => {
+      return validEmail(value);
+    },
+  };
+  public errorServer: string = '';
 
-  public async submitLogin() {
-    await this.login({ email: this.email, password: this.password });
+  @Watch('email')
+  public emailEdit() {
+    this.errorServer = '';
+  }
+
+  @Watch('password')
+  public passwordEdit() {
+    this.errorServer = '';
+  }
+
+  public submitLogin() {
+    this.login({ email: this.email, password: this.password }).then(() => {
+      if (this.error) {
+        this.errorServer = this.error.message;
+      } else {
+        this.$router.push({ name: 'ide' });
+      }
+    });
   }
 }
 </script>

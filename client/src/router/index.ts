@@ -2,10 +2,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import cookie from 'js-cookie';
 import store from '../store';
-import Customers from '../modules/customers/index.vue';
-import CustomerCreate from '../modules/customers/Create.vue';
 import Editor from '../modules/editor/index.vue';
 import Login from '../modules/login/index.vue';
+const Register = () => import('../modules/register/index.vue');
 
 Vue.use(Router);
 
@@ -18,27 +17,14 @@ const router = new Router({
       redirect: { name: 'ide' },
     },
     {
+      path: '/register',
+      name: 'register',
+      component: Register,
+    },
+    {
       path: '/login',
       name: 'login',
       component: Login,
-    },
-    {
-      path: '/teacher',
-      name: 'customers',
-      component: Customers,
-      meta: {
-        isAuth: true,
-        isAdmin: true,
-      },
-    },
-    {
-      path: '/student',
-      name: 'student-dashboard',
-      component: CustomerCreate,
-      meta: {
-        isAuth: true,
-        isUser: true,
-      },
     },
     {
       path: '/ide',

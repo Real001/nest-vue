@@ -1,0 +1,7 @@
+mutation createUser($user: CreateUserInput!) {
+  createUser(createUserInput: $user) {
+    expires_in
+    access_token
+    status
+  }
+}
