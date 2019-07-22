@@ -33,6 +33,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
+            <a href="/register">Sign up</a>
             <v-spacer></v-spacer>
             <v-btn color="warning" @click="submitLogin">
               Login
@@ -63,7 +64,7 @@ export default class Login extends Vue {
   public rules = {
     required: (value: string) => !!value || 'Required.',
     email: (value: string) => {
-     return validEmail(value);
+      return validEmail(value);
     },
   };
   public errorServer: string = '';

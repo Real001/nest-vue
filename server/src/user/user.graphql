@@ -19,12 +19,12 @@ type Token {
 
 type User {
   _id: ID!
-  firstName: String
-  lastName: String
-  email: String
-  phone: String
-  group: ID
+  firstName: String!
+  lastName: String!
+  email: String!
+  group: ID!
   description: String,
+  avatarUrl: String,
   createdAt: Date
   updatedAt: Date
 }

@@ -8,7 +8,12 @@
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
-            <v-form>
+            <v-form
+              ref="form"
+              v-model="valid"
+              lazy-validation
+            >
+              <v-chip color="red" text-color="white" v-if="error">{{error}}</v-chip>
               <v-text-field
                 prepend-icon="person"
                 label="First name"
@@ -75,20 +80,24 @@
                 prepend-icon="lock"
                 v-model="password"
                 dfsf
-                label="Repeat password"
+                label="Confirm password"
                 type="password"
-                :rules="[rules.required]"
+                :rules="[rules.required, rules.password]"
                 required
               >
               </v-text-field>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="warning"
+                  @click="submitCheckIn"
+                  :disabled="!valid"
+                >
+                  Check in
+                </v-btn>
+              </v-card-actions>
             </v-form>
           </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="warning" @click="submitCheckIn">
-              Check in
-            </v-btn>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -96,47 +105,61 @@
 </template>
 
 <script lang="ts">
-  import { Vue, Component, Watch } from 'vue-property-decorator';
-  import { Action, State } from 'vuex-class';
-  import { LoginData, User } from '@/types/models';
-  import { validEmail } from '@/helpers/validation';
-  import CREATE_USER from './_graphql/createUser.gql';
+import { Vue, Component } from 'vue-property-decorator';
+import { QueryResult } from 'vue-apollo/types/vue-apollo';
+import cookie from 'js-cookie';
+import { LoginData, User, LoginResponse } from '@/types/models';
+import { validEmail } from '@/helpers/validation';
+import CREATE_USER from './_graphql/createUser.gql';
 
-  const opt = { namespace: 'auth' };
+const opt = { namespace: 'auth' };
 
-  @Component
-  export default class Register extends Vue {
-    @Action('login', opt) public login!: (data: LoginData) => Promise<void>;
-    @State('loginInProgress', opt) public loginInProgress!: boolean;
-    @State('loginError', opt) public error!: Error | null;
+@Component
+export default class Register extends Vue {
 
-    public user: User = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      description: '',
-      avatarUrl: '',
-      group: '',
-      role: 'user',
-    };
+  public user: User = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    description: '',
+    avatarUrl: '',
+    group: '',
+    role: 'user',
+    password: '',
+  };
 
-    public password: string = '';
-    public rules = {
-      required: (value: string) => !!value || 'Required.',
-      email: (value: string) => {
-        return validEmail(value);
-      },
-    };
+  public password: string = '';
+  public error: string = '';
+  private valid: boolean = true;
+  public rules = {
+    required: (value: string) => !!value || 'Required.',
+    email: (value: string) => {
+      return validEmail(value);
+    },
+    password: (value: string) => {
+      return this.user.password === value || 'The Confirm Password confirmation does not match';
+    }
+  };
 
-    public submitCheckIn() {
-      this.$apollo.mutate({
-        mutation: CREATE_USER,
-        variables: {
-          user: this.user,
-        }
-      }).then((data) => {
-        console.log(data)
+  public submitCheckIn() {
+    if ((this.$refs.form as any).validate()) {
+      this.$apollo
+        .mutate({
+          mutation: CREATE_USER,
+          variables: {
+            user: this.user,
+          },
+        })
+        .then((response: QueryResult<LoginResponse> ) => {
+          console.log(response)
+          cookie.set('access_token', response.data.createUser.access_token, {
+            expires: response.data.createUser.expires_in / 60 / 60 / 24,
+          });
+          this.$router.push({ name: 'ide' });
+        }).catch((err: Error) => {
+        this.error = err.message;
       });
     }
   }
+}
 </script>
