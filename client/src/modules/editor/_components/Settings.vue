@@ -11,6 +11,7 @@
               item-text="label"
               item-value="value"
               required
+              v-model="language"
             ></v-select>
           </v-flex>
         </v-layout>
@@ -18,10 +19,10 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" flat="flat" @click="dialog = false">
+        <v-btn color="green darken-1" flat="flat" @click="close">
           Cancel
         </v-btn>
-        <v-btn color="green darken-1" flat="flat" @click="dialog = false">
+        <v-btn color="green darken-1" flat="flat" @click="close">
           Save
         </v-btn>
       </v-card-actions>
@@ -30,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator';
 import { ConfigEditor } from '@/types/models';
 import { LANGUAGES } from '@/constants/editor';
 import { Select } from '@/types/models';
@@ -41,6 +42,20 @@ export default class Settings extends Vue {
   @Prop() public config!: ConfigEditor;
 
   public languages: Select[] = LANGUAGES;
+
+  private language: string = '';
+
+  private mounted() {
+    this.language = this.config.settings.lang;
+  }
+
+  @Watch('config')
+  private updateLang() {
+    this.language = this.config.settings.lang;
+  }
+
+  @Emit('')
+  private close() { }
 }
 </script>
 

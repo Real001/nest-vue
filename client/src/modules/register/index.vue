@@ -8,12 +8,10 @@
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
-            <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
-              <v-chip color="red" text-color="white" v-if="error">{{error}}</v-chip>
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <v-chip color="red" text-color="white" v-if="error">{{
+                error
+              }}</v-chip>
               <v-text-field
                 prepend-icon="person"
                 label="First name"
@@ -116,7 +114,6 @@ const opt = { namespace: 'auth' };
 
 @Component
 export default class Register extends Vue {
-
   public user: User = {
     firstName: '',
     lastName: '',
@@ -137,8 +134,11 @@ export default class Register extends Vue {
       return validEmail(value);
     },
     password: (value: string) => {
-      return this.user.password === value || 'The Confirm Password confirmation does not match';
-    }
+      return (
+        this.user.password === value ||
+        'The Confirm Password confirmation does not match'
+      );
+    },
   };
 
   public submitCheckIn() {
@@ -150,15 +150,16 @@ export default class Register extends Vue {
             user: this.user,
           },
         })
-        .then((response: QueryResult<LoginResponse> ) => {
-          console.log(response)
+        .then((response: QueryResult<LoginResponse>) => {
+          console.log(response);
           cookie.set('access_token', response.data.createUser.access_token, {
             expires: response.data.createUser.expires_in / 60 / 60 / 24,
           });
           this.$router.push({ name: 'ide' });
-        }).catch((err: Error) => {
-        this.error = err.message;
-      });
+        })
+        .catch((err: Error) => {
+          this.error = err.message;
+        });
     }
   }
 }

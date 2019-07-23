@@ -20,19 +20,21 @@ export interface LoginData {
 }
 
 export interface ConfigEditor {
-  lang?: string;
-  theme?: string;
-  readOnly?: boolean;
-  autoCompletion?: boolean;
-  showPrintMargin?: boolean;
-  useWrapMode?: boolean;
-  useSoftTabs?: boolean;
-  tabSize?: number;
-  useVim?: boolean;
-  useEmmet?: boolean;
-  useBeautifyCode?: boolean;
-  cursorPosition?: CursorPosotion;
-  pagePosition?: number;
+  settings: {
+    lang?: string;
+    theme?: string;
+    readOnly?: boolean;
+    autoCompletion?: boolean;
+    showPrintMargin?: boolean;
+    useWrapMode?: boolean;
+    useSoftTabs?: boolean;
+    tabSize?: number;
+    useVim?: boolean;
+    useEmmet?: boolean;
+    useBeautifyCode?: boolean;
+    cursorPosition?: CursorPosotion;
+    pagePosition?: number;
+  };
 }
 
 export interface MenuGroup {

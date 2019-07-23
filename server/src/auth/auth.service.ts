@@ -21,12 +21,11 @@ export class AuthService {
         throw new UnauthorizedException();
       }
       this.userService.checkPassword(user.password, userData.hash).then((result) => {
-        console.log(result)
         if (result) {
           let payload = `${userData._id}`;
           const accessToken = this.jwtService.sign(payload);
           return {
-            expires_in: 3600,
+            expires_in: 36000,
             access_token: accessToken,
             status: 200
           }

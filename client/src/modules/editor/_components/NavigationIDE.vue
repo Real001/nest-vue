@@ -20,12 +20,12 @@
         </v-avatar>
       </v-btn>
     </v-toolbar>
-    <settings :dialog="dialog" :config="config"/>
+    <settings @close="closeSettings" :dialog="dialog" :config="config" />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import ListTile from '@/components/lists/ListTile.vue';
 import ListGroup from '@/components/lists/ListGroup.vue';
 import Settings from './Settings.vue';
@@ -51,6 +51,11 @@ export default class NavigationIDE extends Vue {
     },
   ];
   public dialog: boolean = false;
+
+  @Emit()
+  public closeSettings() {
+    this.dialog = false;
+  }
 
   public openSettings() {
     this.dialog = true;

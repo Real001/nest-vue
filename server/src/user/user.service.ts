@@ -52,7 +52,7 @@ export class UserService {
   }
 
 	async findOneById(id: ID): Promise<User> {
-		return await this.UserModel.findById(id).exec();
+		return await this.UserModel.findById(id, { hash: 0 }).exec();
 	}
 	
 	async findByEmail(email: string): Promise<User> {

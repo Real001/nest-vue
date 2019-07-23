@@ -1,11 +1,35 @@
 <template>
   <v-app id="editor" dark>
-    <navigation-i-d-e :user="user" :config="config"/>
-    <v-content>
-      <v-container fluid fill-height>
-        <ace-editor v-model="code" :config="config" />
-      </v-container>
-    </v-content>
+    <ApolloQuery
+      :query="require('./_graphql/querySettings.gql')"
+      :variables="{ user: user._id }"
+    >
+      <template v-slot="{ result: { loading, error, data } }">
+        <v-progress-circular
+          v-if="loading"
+          indeterminate
+          color="amber"
+        ></v-progress-circular>
+        <v-alert
+          v-else-if="error"
+          :value="true"
+          type="error"
+        >
+          {{error}}
+        </v-alert>
+        <!--TODO поправить отображение редактора-->
+        <div v-else-if="data">
+          <navigation-i-d-e :user="user" :config="data" />
+          <v-content>
+            <v-container fluid fill-height>
+              <v-layout>
+                <ace-editor v-model="code" :config="data" />
+              </v-layout>
+            </v-container>
+          </v-content>
+        </div>
+      </template>
+    </ApolloQuery>
   </v-app>
 </template>
 
@@ -14,7 +38,6 @@ import { Vue, Component } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { ConfigEditor, User } from '@/types/models';
 import NavigationIDE from './_components/NavigationIDE.vue';
-import QUERY_SETTINGS from './_graphql/querySettings.gql'
 
 @Component({ components: { NavigationIDE } })
 export default class EditorPage extends Vue {
@@ -22,16 +45,7 @@ export default class EditorPage extends Vue {
 
   private code: string = 'jjkhjl';
 
-  private get config() {
-    const config = this.$apollo.query({
-      query: QUERY_SETTINGS,
-      variables: {
-        user:this.user._id
-      }
-    });
-    console.log(config)
-    return null;
-  }
+
 }
 </script>
 

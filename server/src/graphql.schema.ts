@@ -49,12 +49,12 @@ export class Token {
 
 export class User {
     _id: string;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    phone?: string;
-    group?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    group: string;
     description?: string;
+    avatarUrl?: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
