@@ -10,12 +10,8 @@
           indeterminate
           color="amber"
         ></v-progress-circular>
-        <v-alert
-          v-else-if="error"
-          :value="true"
-          type="error"
-        >
-          {{error}}
+        <v-alert v-else-if="error" :value="true" type="error">
+          {{ error }}
         </v-alert>
         <!--TODO поправить отображение редактора-->
         <div v-else-if="data">
@@ -44,8 +40,6 @@ export default class EditorPage extends Vue {
   @Getter('user', { namespace: 'auth' }) public user!: User;
 
   private code: string = 'jjkhjl';
-
-
 }
 </script>
 

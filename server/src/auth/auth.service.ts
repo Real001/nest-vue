@@ -1,29 +1,32 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, Inject } from '@nestjs/common';
 import { JwtService } from  '@nestjs/jwt';
+import { Logger } from 'winston';
 import { UserService } from  '../user/user.service';
-import { User } from '../interfaces/user.interface';
+import { User, LoginData } from '../interfaces/user.interface';
 import { ID } from '../interfaces/common.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    @Inject('winston') private readonly logger: Logger
   ) { }
 
-  private async validate(userData: User): Promise<User> {
-    return await this.userService.findOne({email: userData.email});
+  private async validate(loginData: LoginData): Promise<User> {
+    return await this.userService.findOne({email: loginData.email});
   }
 
-  public async login(user: User): Promise<any | { status: number }> {
-    return this.validate(user).then((userData) => {
+  public async login(loginData: LoginData): Promise<any | { status: number }> {
+    return this.validate(loginData).then((userData) => {
       if (!userData) {
         throw new UnauthorizedException();
       }
-      this.userService.checkPassword(user.password, userData.hash).then((result) => {
+      this.userService.checkPassword(loginData.password, userData.hash).then((result) => {
         if (result) {
           let payload = `${userData._id}`;
           const accessToken = this.jwtService.sign(payload);
+          this.logger.error(accessToken);
           return {
             expires_in: 36000,
             access_token: accessToken,

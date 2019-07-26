@@ -54,8 +54,8 @@ export default class Settings extends Vue {
     this.language = this.config.settings.lang;
   }
 
-  @Emit('')
-  private close() { }
+  @Emit()
+  private close() {}
 }
 </script>
 
