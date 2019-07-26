@@ -5,6 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 // HTTP connexion to the API
 const httpLink = new HttpLink({
   uri: 'http://localhost:3000/graphql',
+  credentials: 'same-origin',
 });
 
 // Cache implementation

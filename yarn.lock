@@ -775,6 +775,11 @@
   resolved "https://registry.yarnpkg.com/@nestjs/mongoose/-/mongoose-5.2.2.tgz#62de0bd1c2eda0865a2bb034270f1bda51a61915"
   integrity sha512-OwdZWsatFPvEAjvMAmje9sGryo69oilSvt5iRf7jYacfa03zlsTpHecmDwrADsBmdP3FDmEDLEFxsJQosnO+wg==
 
+"@nestjs/passport@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-6.1.0.tgz#80da326cc976a82530648d8025b04c8e2d41c10e"
+  integrity sha512-V4KdtFFLsdZQ/HlIECpiK6byzGz57Y12TAc+Iatykk8jWuVFE1jq8RJbpTfB0zG0PTfcGm9crQ6Ut2Rwdmis4Q==
+
 "@nestjs/testing@^5.1.0":
   version "5.7.4"
   resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-5.7.4.tgz#418e993416bd0c1b27b3adf14cc7d59f4ff2a622"

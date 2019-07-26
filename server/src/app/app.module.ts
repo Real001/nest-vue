@@ -39,6 +39,7 @@ const consoleFormat = printf(
         path: join(process.cwd(), 'src/graphql.schema.ts'),
         outputAs: 'class',
       },
+      context: ({ req }) => ({ req }),
     }),
     AppService,
     UserModule,
