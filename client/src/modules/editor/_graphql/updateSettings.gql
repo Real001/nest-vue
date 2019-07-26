@@ -1,0 +1,5 @@
+mutation UpdateSettingsIDE($settings: SettingsInput!, $user: String!) {
+  updateSettings(settings: $settings, idUser: $user) {
+    lang
+  }
+}

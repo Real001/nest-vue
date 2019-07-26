@@ -1,5 +1,0 @@
-mutation UpdateSettingsIDE($language: String!) {
-  updateSettings(language: $language) {
-    language
-  }
-}

@@ -20,7 +20,7 @@
         </v-avatar>
       </v-btn>
     </v-toolbar>
-    <settings @close="closeSettings" :dialog="dialog" :config="config" />
+    <settings @close="closeSettings" :dialog="dialog" :config="config" :id="user._id"/>
   </div>
 </template>
 

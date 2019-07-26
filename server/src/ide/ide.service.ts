@@ -21,4 +21,8 @@ export class IdeService {
 	async findByUser(user: string): Promise<Settings> {
 		return await this.SettingsModel.findOne({user}).exec();
 	}
+
+	async updateSettings(settings: Settings, id: string): Promise<Settings> {
+		return await this.SettingsModel.findOneAndUpdate({ user: id }, { ...settings, user: id });
+	}
 }

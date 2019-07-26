@@ -10,3 +10,13 @@ type Settings {
   lang: String!
   theme: String!
 }
+
+type Mutation {
+  updateSettings(settings: SettingsInput!, idUser: String!): Settings
+}
+
+input SettingsInput {
+  lang: String!
+  theme: String!
+}
+

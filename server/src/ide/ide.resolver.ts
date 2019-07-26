@@ -16,4 +16,9 @@ export class IdeResolver {
 	async getSettings(@Args('user') user: string): Promise<Settings> {
 		return await this.ideService.findByUser(user);
 	}
+
+	@Mutation('updateSettings')
+	async updateSettings(@Args('settings') settings: Settings, @Args('idUser') id: string): Promise<Settings> {
+		return this.ideService.updateSettings(settings, id);
+	}
 }

@@ -22,7 +22,7 @@
         <v-btn color="green darken-1" flat="flat" @click="close">
           Cancel
         </v-btn>
-        <v-btn color="green darken-1" flat="flat" @click="close">
+        <v-btn color="green darken-1" flat="flat" @click="save">
           Save
         </v-btn>
       </v-card-actions>
@@ -35,11 +35,13 @@ import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator';
 import { ConfigEditor } from '@/types/models';
 import { LANGUAGES } from '@/constants/editor';
 import { Select } from '@/types/models';
+import UPDATE_SETTINGS from '../_graphql/updateSettings.gql';
 
 @Component
 export default class Settings extends Vue {
   @Prop({ type: Boolean, default: false }) public dialog!: boolean;
   @Prop() public config!: ConfigEditor;
+  @Prop(String) public id!: string;
 
   public languages: Select[] = LANGUAGES;
 
@@ -56,6 +58,21 @@ export default class Settings extends Vue {
 
   @Emit()
   private close() {}
+
+  @Emit()
+  private save() {
+    this.$apollo
+      .mutate({
+        mutation: UPDATE_SETTINGS,
+        variables: {
+          settings: {
+            lang: this.language,
+            theme: this.config.settings.theme,
+          },
+          user: this.id,
+        },
+      })
+  }
 }
 </script>
 

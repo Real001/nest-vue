@@ -1,8 +1,10 @@
 <template>
   <v-app id="editor" dark>
+    <div class="editor-block">
     <ApolloQuery
       :query="require('./_graphql/querySettings.gql')"
       :variables="{ user: user._id }"
+      :style="{ height:'100%' }"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <v-progress-circular
@@ -14,18 +16,17 @@
           {{ error }}
         </v-alert>
         <!--TODO поправить отображение редактора-->
-        <div v-else-if="data">
-          <navigation-i-d-e :user="user" :config="data" />
-          <v-content>
-            <v-container fluid fill-height>
-              <v-layout>
-                <ace-editor v-model="code" :config="data" />
-              </v-layout>
-            </v-container>
-          </v-content>
-        </div>
+        <navigation-i-d-e :user="user" :config="data" />
+        <v-content class="editor-block">
+          <v-container fluid fill-height>
+            <v-layout>
+              <ace-editor v-model="code" :config="data" />
+            </v-layout>
+          </v-container>
+        </v-content>
       </template>
     </ApolloQuery>
+    </div>
   </v-app>
 </template>
 
@@ -45,10 +46,7 @@ export default class EditorPage extends Vue {
 
 <style scoped>
 .editor-block {
-  top: 80px;
-  left: 0;
   width: 100%;
   height: 100%;
-  position: absolute;
 }
 </style>

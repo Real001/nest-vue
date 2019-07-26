@@ -104,7 +104,6 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import cookie from 'js-cookie';
 import { LoginData, User, LoginResponse } from '@/types/models';
 import { validEmail } from '@/helpers/validation';
@@ -150,7 +149,7 @@ export default class Register extends Vue {
             user: this.user,
           },
         })
-        .then((response: QueryResult<LoginResponse>) => {
+        .then(response => {
           console.log(response);
           cookie.set('access_token', response.data.createUser.access_token, {
             expires: response.data.createUser.expires_in / 60 / 60 / 24,

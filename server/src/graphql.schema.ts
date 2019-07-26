@@ -10,11 +10,18 @@ export class CreateUserInput {
     role?: string;
 }
 
+export class SettingsInput {
+    lang: string;
+    theme: string;
+}
+
 export class Ide {
     settings?: Settings;
 }
 
 export abstract class IMutation {
+    abstract updateSettings(settings: SettingsInput, idUser: string): Settings | Promise<Settings>;
+
     abstract createUser(createUserInput: CreateUserInput): Token | Promise<Token>;
 
     abstract updateUser(_id: string, createUserInput?: CreateUserInput): User | Promise<User>;
