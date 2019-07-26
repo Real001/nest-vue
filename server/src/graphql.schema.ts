@@ -50,7 +50,7 @@ export abstract class ISubscription {
 
 export class Token {
     expires_in?: string;
-    access_token?: string;
+    code_student_token?: string;
     status?: number;
 }
 

@@ -28,7 +28,7 @@ export class AuthService {
           const accessToken = this.jwtService.sign(payload);
           return {
             expires_in: 36000,
-            access_token: accessToken,
+            code_student_token: accessToken,
             status: 200
           }
         } else {

@@ -60,7 +60,7 @@ export interface SettingsIDE {
 
 export interface LoginResponse {
   createUser: {
-    access_token: string;
+    code_student_token: string;
     expires_in: number;
     status: number;
   };

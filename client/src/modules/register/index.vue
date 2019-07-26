@@ -151,7 +151,7 @@ export default class Register extends Vue {
         })
         .then(response => {
           console.log(response);
-          cookie.set('access_token', response.data.createUser.access_token, {
+          cookie.set('code_student_token', response.data.createUser.code_student_token, {
             expires: response.data.createUser.expires_in / 60 / 60 / 24,
           });
           this.$router.push({ name: 'ide' });

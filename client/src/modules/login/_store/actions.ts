@@ -36,8 +36,8 @@ export default {
       },
       action: async () => {
         const response = (await login(data)) as any;
-        if (response.data.access_token) {
-          cookie.set('access_token', response.data.access_token, {
+        if (response.data.code_student_token) {
+          cookie.set('code_student_token', response.data.code_student_token, {
             expires: response.data.expires_in / 60 / 60 / 24,
           });
         }

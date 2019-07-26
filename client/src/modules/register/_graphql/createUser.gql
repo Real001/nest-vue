@@ -1,7 +1,7 @@
 mutation createUser($user: CreateUserInput!) {
   createUser(createUserInput: $user) {
     expires_in
-    access_token
+    code_student_token
     status
   }
 }

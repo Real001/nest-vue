@@ -5,7 +5,7 @@ import { User, LoginData } from '@/types/models';
 export async function loadMe(): Promise<User> {
   return axios.get(`${process.env.VUE_APP_SERVER_API}/auth/me`, {
     headers: {
-      Authorization: cookie.get('access_token'),
+      Authorization: cookie.get('code_student_token'),
       'Content-Type': 'application/json',
     },
   });
