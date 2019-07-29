@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { ID } from '../interfaces/common.interface';
-import { Settings } from '../graphql.schema';
+import { Settings, Code } from '../graphql.schema';
 
 @Injectable()
 export class IdeService {
 
-	constructor(@InjectModel('settingsIde') private readonly SettingsModel: Model<Settings>) { }
+	constructor(
+		@InjectModel('settingsIde') private readonly SettingsModel: Model<Settings>,
+    @InjectModel('codes') private readonly CodeModel: Model<Code>,
+	) { }
 
 
 	async findAll(): Promise<Settings[]> {
@@ -25,4 +28,8 @@ export class IdeService {
 	async updateSettings(settings: Settings, id: string): Promise<Settings> {
 		return await this.SettingsModel.findOneAndUpdate({ user: id }, { ...settings, user: id });
 	}
+
+  async saveCode(code: string, id: string, name: string): Promise<string> {
+		return await this.CodeModel.create({ user: id, code, name });
+  }
 }

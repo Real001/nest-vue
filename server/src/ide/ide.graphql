@@ -11,8 +11,16 @@ type Settings {
   theme: String!
 }
 
+type Code {
+  code: String!
+  user: String!
+  name: String!
+  result: String
+}
+
 type Mutation {
   updateSettings(settings: SettingsInput!, idUser: String!): Settings
+  saveCode(code: String!, idUser: String!, name: String!): String
 }
 
 input SettingsInput {

@@ -21,4 +21,10 @@ export class IdeResolver {
 	async updateSettings(@Args('settings') settings: Settings, @Args('idUser') id: string): Promise<Settings> {
 		return this.ideService.updateSettings(settings, id);
 	}
+
+  @UseGuards(AuthGuard)
+  @Mutation('updateSettings')
+  async saveCode(@Args('code') code: string, @Args('idUser') id: string, @Args('name') name: string): Promise<Settings> {
+    return this.ideService.saveCode(code, id, name);
+  }
 }

@@ -15,12 +15,21 @@ export class SettingsInput {
     theme: string;
 }
 
+export class Code {
+    code: string;
+    user: string;
+    name: string;
+    result?: string;
+}
+
 export class Ide {
     settings?: Settings;
 }
 
 export abstract class IMutation {
     abstract updateSettings(settings: SettingsInput, idUser: string): Settings | Promise<Settings>;
+
+    abstract saveCode(code: string, idUser: string, name: string): string | Promise<string>;
 
     abstract createUser(createUserInput: CreateUserInput): Token | Promise<Token>;
 
