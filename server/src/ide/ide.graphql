@@ -1,5 +1,6 @@
 type Query {
   settings(user: String!): Settings
+  listCodeUser(user: String!): [Code]
 }
 
 type Ide {
@@ -18,6 +19,8 @@ type Code {
   name: String!
   result: String
   lang: String!
+  createdAt: Date
+  updatedAt: Date
 }
 
 type Mutation {

@@ -34,6 +34,18 @@
       @click="saveCode"
       @close="closeSave"
     />
+    <ApolloQuery
+      :query="require('../_graphql/listCodes.graphql')"
+      :variables="{ user: user._id }"
+    >
+      <template v-slot="{ result: { loading, error, data } }">
+        <open-code-modal
+          :dialog="isOpen"
+          @close="closeOpenCodeModal"
+          :items="data.listCodeUser"
+        />
+      </template>
+    </ApolloQuery>
   </div>
 </template>
 
@@ -47,8 +59,11 @@ import { User } from '@/types/models';
 import { ConfigEditor } from '@/types/models';
 import ListGroup from '@/components/lists/ListGroup.vue';
 import SAVE_CODE from '../_graphql/saveCode.gql';
+import OpenCodeModal from '../_components/OpenCodeModal.vue';
 
-@Component({ components: { ListTile, ListGroup, Settings, ModalInput } })
+@Component({
+  components: { ListTile, ListGroup, Settings, ModalInput, OpenCodeModal },
+})
 export default class NavigationIDE extends Vue {
   @Prop() public user!: User;
   @Prop() public config!: ConfigEditor;
@@ -61,16 +76,24 @@ export default class NavigationIDE extends Vue {
       title: 'Code',
       items: [
         { title: 'New', action: '1', click: this.newCode },
-        { title: 'Open', action: 'folder_open' },
+        { title: 'Open', action: 'folder_open', click: this.openCodeModal },
         { title: 'Save', action: 'save', click: this.openSaveModal },
       ],
     },
   ];
   public dialog: boolean = false;
   public isSave: boolean = false;
+  public isOpen: boolean = false;
 
+  @Emit()
   private newCode() {}
 
+  @Emit()
+  private openCodeModal() {
+    this.isOpen = true;
+  }
+
+  @Emit()
   private openSaveModal() {
     this.isSave = true;
   }
@@ -91,6 +114,11 @@ export default class NavigationIDE extends Vue {
   @Emit()
   private closeSave() {
     this.isSave = false;
+  }
+
+  @Emit()
+  private closeOpenCodeModal() {
+    this.isOpen = false;
   }
 
   @Emit()

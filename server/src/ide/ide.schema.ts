@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import {Date} from '../graphql.schema';
 
 export const SettingIde = new Schema({
   user: String,
@@ -12,4 +13,6 @@ export const Codes = new Schema({
   name: String,
   result: String,
   lang: String,
+  updatedAt: Date,
+  createdAt: Date,
 });

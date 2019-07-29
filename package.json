@@ -8,7 +8,8 @@
     ],
     "nohoist": [
       "**/vuetify",
-      "**/material-design-icons-iconfont"
+      "**/material-design-icons-iconfont",
+      "**/devicon"
     ]
   },
   "scripts": {

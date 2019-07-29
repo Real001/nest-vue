@@ -22,6 +22,8 @@ export class Code {
     name: string;
     result?: string;
     lang: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export class Ide {
@@ -42,6 +44,8 @@ export abstract class IMutation {
 
 export abstract class IQuery {
     abstract settings(user: string): Settings | Promise<Settings>;
+
+    abstract listCodeUser(user: string): Code[] | Promise<Code[]>;
 
     abstract getUsers(): User[] | Promise<User[]>;
 

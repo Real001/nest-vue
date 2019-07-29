@@ -43,6 +43,7 @@ export interface MenuGroup {
   active?: boolean;
   items?: MenuGroup[];
   click?: () => void;
+  key?: string;
 }
 
 export interface Select {

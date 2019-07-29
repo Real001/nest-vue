@@ -11,10 +11,17 @@ import { Settings, Code } from '../graphql.schema';
 export class IdeResolver {
 	constructor(private readonly ideService: IdeService) {}
   @UseGuards(AuthGuard)
-	@Query('settings')
-	async getSettings(@Context() ctx, @Args('user') user: string): Promise<Settings> {
-		return await this.ideService.findByUser(user);
+	@Query('listCodeUser')
+	async listCodeUser(@Context() ctx, @Args('user') user: string): Promise<Code[]> {
+		return await this.ideService.listCodeUser(user);
 	}
+
+  @UseGuards(AuthGuard)
+  @Query('settings')
+  async getSettings(@Context() ctx, @Args('user') user: string): Promise<Settings> {
+    return await this.ideService.findByUser(user);
+  }
+
 
   @UseGuards(AuthGuard)
 	@Mutation('updateSettings')

@@ -30,6 +30,10 @@ export class IdeService {
 	}
 
   async saveCode(code: string, id: string, name: string, lang: string): Promise<Code> {
-		return await this.CodeModel.create({ user: id, code, name, lang });
+		return await this.CodeModel.create({ user: id, code, name, lang, updatedAt: new Date(), createdAt: new Date() });
   }
+
+  async listCodeUser(user: string): Promise<Code[]> {
+		return await this.CodeModel.find({ user }).exec();
+	}
 }
