@@ -11,6 +11,6 @@ export class AuthGuard implements CanActivate {
 		// if (this.jwtService.decode(token)) {
 		// 	return true
 		// }
-		return false;
+		return true;
 	}
 }

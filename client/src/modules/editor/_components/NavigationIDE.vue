@@ -46,11 +46,13 @@ import { MenuGroup } from '@/types/models';
 import { User } from '@/types/models';
 import { ConfigEditor } from '@/types/models';
 import ListGroup from '@/components/lists/ListGroup.vue';
+import SAVE_CODE from '../_graphql/saveCode.gql';
 
 @Component({ components: { ListTile, ListGroup, Settings, ModalInput } })
 export default class NavigationIDE extends Vue {
   @Prop() public user!: User;
   @Prop() public config!: ConfigEditor;
+  @Prop(String) public code!: string;
 
   public drawer: string | null = null;
   public menuCode: MenuGroup[] = [
@@ -75,7 +77,15 @@ export default class NavigationIDE extends Vue {
 
   @Emit()
   private saveCode(name: string) {
-    console.log(name);
+    this.$apollo.mutate({
+      mutation: SAVE_CODE,
+      variables: {
+        code: this.code,
+        name,
+        lang: this.config.settings.lang,
+        user: this.user._id,
+      },
+    });
     this.isSave = false;
   }
   @Emit()

@@ -16,10 +16,12 @@ export class SettingsInput {
 }
 
 export class Code {
+    _id?: string;
     code: string;
     user: string;
     name: string;
     result?: string;
+    lang: string;
 }
 
 export class Ide {
@@ -29,7 +31,7 @@ export class Ide {
 export abstract class IMutation {
     abstract updateSettings(settings: SettingsInput, idUser: string): Settings | Promise<Settings>;
 
-    abstract saveCode(code: string, idUser: string, name: string): string | Promise<string>;
+    abstract saveCode(code: string, idUser: string, name: string, lang: string): Code | Promise<Code>;
 
     abstract createUser(createUserInput: CreateUserInput): Token | Promise<Token>;
 

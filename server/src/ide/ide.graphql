@@ -12,15 +12,17 @@ type Settings {
 }
 
 type Code {
+  _id: String
   code: String!
   user: String!
   name: String!
   result: String
+  lang: String!
 }
 
 type Mutation {
   updateSettings(settings: SettingsInput!, idUser: String!): Settings
-  saveCode(code: String!, idUser: String!, name: String!): String
+  saveCode(code: String!, idUser: String!, name: String!, lang: String!): Code
 }
 
 input SettingsInput {

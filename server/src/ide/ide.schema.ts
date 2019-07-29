@@ -11,4 +11,5 @@ export const Codes = new Schema({
   code: String,
   name: String,
   result: String,
+  lang: String,
 });

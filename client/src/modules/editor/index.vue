@@ -15,7 +15,7 @@
           {{ error }}
         </v-alert>
         <!--TODO поправить отображение редактора-->
-        <navigation-i-d-e :user="user" :config="data" />
+        <navigation-i-d-e :user="user" :config="data" :code="code" />
         <v-content class="editor-block">
           <v-container fluid fill-height>
             <v-layout>

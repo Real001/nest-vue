@@ -29,7 +29,7 @@ export class IdeService {
 		return await this.SettingsModel.findOneAndUpdate({ user: id }, { ...settings, user: id });
 	}
 
-  async saveCode(code: string, id: string, name: string): Promise<string> {
-		return await this.CodeModel.create({ user: id, code, name });
+  async saveCode(code: string, id: string, name: string, lang: string): Promise<Code> {
+		return await this.CodeModel.create({ user: id, code, name, lang });
   }
 }

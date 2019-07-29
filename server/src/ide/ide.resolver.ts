@@ -4,7 +4,7 @@ import { PubSub } from 'graphql-subscriptions';
 import { IdeService } from './ide.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { ID } from '../interfaces/common.interface';
-import { Settings } from '../graphql.schema';
+import { Settings, Code } from '../graphql.schema';
 
 
 @Resolver('Ide')
@@ -23,8 +23,8 @@ export class IdeResolver {
 	}
 
   @UseGuards(AuthGuard)
-  @Mutation('updateSettings')
-  async saveCode(@Args('code') code: string, @Args('idUser') id: string, @Args('name') name: string): Promise<Settings> {
-    return this.ideService.saveCode(code, id, name);
+  @Mutation('saveCode')
+  async saveCode(@Args('code') code: string, @Args('idUser') id: string, @Args('name') name: string, @Args('lang') lang: string): Promise<Code> {
+    return this.ideService.saveCode(code, id, name, lang);
   }
 }
