@@ -48,7 +48,9 @@ export default class Settings extends Vue {
   private language: string = '';
 
   private mounted() {
-    this.language = this.config.settings.lang;
+    if (this.config) {
+      this.language = this.config.settings.lang;
+    }
   }
 
   @Watch('config')
@@ -61,17 +63,16 @@ export default class Settings extends Vue {
 
   @Emit()
   private save() {
-    this.$apollo
-      .mutate({
-        mutation: UPDATE_SETTINGS,
-        variables: {
-          settings: {
-            lang: this.language,
-            theme: this.config.settings.theme,
-          },
-          user: this.id,
+    this.$apollo.mutate({
+      mutation: UPDATE_SETTINGS,
+      variables: {
+        settings: {
+          lang: this.language,
+          theme: this.config.settings.theme,
         },
-      })
+        user: this.id,
+      },
+    });
   }
 }
 </script>

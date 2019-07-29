@@ -20,20 +20,34 @@
         </v-avatar>
       </v-btn>
     </v-toolbar>
-    <settings @close="closeSettings" :dialog="dialog" :config="config" :id="user._id"/>
+    <settings
+      @close="closeSettings"
+      :dialog="dialog"
+      :config="config"
+      :id="user._id"
+    />
+    <modal-input
+      :dialog="isSave"
+      title="Save is"
+      label="Name"
+      clickTitle="Save"
+      @click="saveCode"
+      @close="closeSave"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import ListTile from '@/components/lists/ListTile.vue';
-import ListGroup from '@/components/lists/ListGroup.vue';
+import ModalInput from '@/components/modals/ModalInput.vue';
 import Settings from './Settings.vue';
 import { MenuGroup } from '@/types/models';
 import { User } from '@/types/models';
 import { ConfigEditor } from '@/types/models';
+import ListGroup from '@/components/lists/ListGroup.vue';
 
-@Component({ components: { ListTile, ListGroup, Settings } })
+@Component({ components: { ListTile, ListGroup, Settings, ModalInput } })
 export default class NavigationIDE extends Vue {
   @Prop() public user!: User;
   @Prop() public config!: ConfigEditor;
@@ -44,19 +58,37 @@ export default class NavigationIDE extends Vue {
       action: 'code',
       title: 'Code',
       items: [
-        { title: 'New', action: '1' },
+        { title: 'New', action: '1', click: this.newCode },
         { title: 'Open', action: 'folder_open' },
-        { title: 'Save', action: 'save' },
+        { title: 'Save', action: 'save', click: this.openSaveModal },
       ],
     },
   ];
   public dialog: boolean = false;
+  public isSave: boolean = false;
+
+  private newCode() {}
+
+  private openSaveModal() {
+    this.isSave = true;
+  }
+
+  @Emit()
+  private saveCode(name: string) {
+    console.log(name);
+    this.isSave = false;
+  }
+  @Emit()
+  private closeSave() {
+    this.isSave = false;
+  }
 
   @Emit()
   public closeSettings() {
     this.dialog = false;
   }
 
+  @Emit()
   public openSettings() {
     this.dialog = true;
   }

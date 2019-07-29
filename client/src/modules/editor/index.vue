@@ -1,10 +1,9 @@
 <template>
   <v-app id="editor" dark>
-    <div class="editor-block">
     <ApolloQuery
       :query="require('./_graphql/querySettings.gql')"
       :variables="{ user: user._id }"
-      :style="{ height:'100%' }"
+      :style="{ height: '100%' }"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <v-progress-circular
@@ -26,7 +25,6 @@
         </v-content>
       </template>
     </ApolloQuery>
-    </div>
   </v-app>
 </template>
 

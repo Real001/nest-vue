@@ -21,7 +21,7 @@ export interface LoginData {
 
 export interface ConfigEditor {
   settings: {
-    lang?: string;
+    lang: string;
     theme?: string;
     readOnly?: boolean;
     autoCompletion?: boolean;
@@ -42,6 +42,7 @@ export interface MenuGroup {
   title: string;
   active?: boolean;
   items?: MenuGroup[];
+  click?: () => void;
 }
 
 export interface Select {

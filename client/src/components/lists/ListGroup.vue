@@ -5,7 +5,6 @@
       :key="item.title"
       v-model="item.active"
       :prepend-icon="item.action"
-      no-action
     >
       <template v-slot:activator>
         <list-tile :title="item.title" />
@@ -16,6 +15,7 @@
         :key="subItem.title"
         :title="subItem.title"
         :icon="subItem.action"
+        @click="subItem.click"
       />
     </v-list-group>
   </div>
