@@ -2,13 +2,13 @@
   <div>
     <v-navigation-drawer v-model="drawer" clipped fixed app>
       <v-list dense>
-        <list-tile icon="dashboard" title="Dashboard" />
+        <list-item icon="dashboard" title="Dashboard" />
         <list-group :items="menuCode" />
-        <list-tile icon="settings" title="Settings" @click="openSettings" />
+        <list-item icon="settings" title="Settings" @click="openSettings" />
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app fixed clipped-left>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-app-bar app fixed clipped-left>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>IDE</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -19,7 +19,7 @@
           <img :src="user.avatarUrl" :alt="fullName" />
         </v-avatar>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
     <settings
       @close="closeSettings"
       :dialog="dialog"
@@ -51,7 +51,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
-import ListTile from '@/components/lists/ListTile.vue';
+import ListItem from '@/components/lists/ListItem.vue';
 import ModalInput from '@/components/modals/ModalInput.vue';
 import Settings from './Settings.vue';
 import { MenuGroup } from '@/types/models';
@@ -62,7 +62,7 @@ import SAVE_CODE from '../_graphql/saveCode.gql';
 import OpenCodeModal from '../_components/OpenCodeModal.vue';
 
 @Component({
-  components: { ListTile, ListGroup, Settings, ModalInput, OpenCodeModal },
+  components: { ListItem, ListGroup, Settings, ModalInput, OpenCodeModal },
 })
 export default class NavigationIDE extends Vue {
   @Prop() public user!: User;

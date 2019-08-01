@@ -1,3 +1,5 @@
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+
 module.exports = {
   chainWebpack: config => {
     config.devtool = 'source-map';
@@ -12,5 +14,8 @@ module.exports = {
       enableMocks: true,
       enableEngine: true,
     },
+  },
+  configureWebpack: {
+    plugins: [new VuetifyLoaderPlugin()],
   },
 };

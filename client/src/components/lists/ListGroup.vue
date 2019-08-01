@@ -7,10 +7,10 @@
       :prepend-icon="item.action"
     >
       <template v-slot:activator>
-        <list-tile :title="item.title" />
+        <list-item :title="item.title" />
       </template>
 
-      <list-tile
+      <list-item
         v-for="subItem in item.items"
         :key="subItem.title"
         :title="subItem.title"
@@ -24,9 +24,9 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { MenuGroup } from '@/types/models';
-import ListTile from './ListTile.vue';
+import ListItem from './ListItem.vue';
 
-@Component({ components: { ListTile } })
+@Component({ components: { ListItem } })
 export default class ListGroup extends Vue {
   @Prop() public items!: MenuGroup[];
 }

@@ -1,8 +1,8 @@
 query listCode($user: String!) {
   listCodeUser(user: $user) {
-    key: _id
-    title: name
+    _id
+    name
     lang
-    date: updatedAt
+    updatedAt
   }
 }

@@ -9,7 +9,9 @@
     "nohoist": [
       "**/vuetify",
       "**/material-design-icons-iconfont",
-      "**/devicon"
+      "**/devicon",
+      "**/@mdi/font",
+      "**/vuetify-loader"
     ]
   },
   "scripts": {

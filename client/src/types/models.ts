@@ -67,3 +67,18 @@ export interface LoginResponse {
     status: number;
   };
 }
+
+export interface ListItems {
+  title: string;
+  iconClass?: string;
+  icon: string;
+  subtitle: string;
+  key: string;
+}
+
+export interface ListCode {
+  _id: string;
+  name: string;
+  lang: string;
+  updatedAt: Date;
+}
