@@ -8,9 +8,9 @@ import { UserModule } from '../user/user.module';
 @Module({
   imports: [UserModule,
     JwtModule.register({
-    secretOrPrivateKey: 'secretIdeStudent'
+    secretOrPrivateKey: 'secretIdeStudent',
   })],
   providers: [AuthService, UserService],
-  controllers: [AuthController]
+  controllers: [AuthController],
 })
 export class AuthModule {}

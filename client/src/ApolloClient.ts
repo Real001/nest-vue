@@ -6,7 +6,7 @@ import cookie from 'js-cookie';
 
 // HTTP connexion to the API
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
