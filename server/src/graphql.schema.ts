@@ -47,6 +47,8 @@ export abstract class IQuery {
 
     abstract listCodeUser(user: string): Code[] | Promise<Code[]>;
 
+    abstract codeById(_id: string): Code | Promise<Code>;
+
     abstract getUsers(): User[] | Promise<User[]>;
 
     abstract user(_id: string): User | Promise<User>;

@@ -1,6 +1,7 @@
 type Query {
   settings(user: String!): Settings
   listCodeUser(user: String!): [Code]
+  codeById(_id: String!): Code
 }
 
 type Ide {

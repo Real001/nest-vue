@@ -37,12 +37,14 @@
     <ApolloQuery
       :query="require('../_graphql/listCodes.graphql')"
       :variables="{ user: user._id }"
+      fetchPolicy="network-only"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <open-code-modal
           :dialog="isOpen"
           @close="closeOpenCodeModal"
           :items="data.listCodeUser"
+          @click-ok="clickOpenCodeModal"
         />
       </template>
     </ApolloQuery>
@@ -51,15 +53,18 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
+import { Mutation } from 'vuex-class';
+import { ApolloQueryResult } from 'apollo-client';
 import ListItem from '@/components/lists/ListItem.vue';
 import ModalInput from '@/components/modals/ModalInput.vue';
 import Settings from './Settings.vue';
-import { MenuGroup } from '@/types/models';
-import { User } from '@/types/models';
-import { ConfigEditor } from '@/types/models';
+import { MenuGroup, ConfigEditor, User } from '@/types/models';
 import ListGroup from '@/components/lists/ListGroup.vue';
 import SAVE_CODE from '../_graphql/saveCode.gql';
 import OpenCodeModal from '../_components/OpenCodeModal.vue';
+import { LOADING_CODE, ERROR } from '@/constants/mutation-types';
+import CODE_BY_ID from '../_graphql/codebyId.graphql';
+import { CodeById } from '@/types/queries';
 
 @Component({
   components: { ListItem, ListGroup, Settings, ModalInput, OpenCodeModal },
@@ -68,6 +73,11 @@ export default class NavigationIDE extends Vue {
   @Prop() public user!: User;
   @Prop() public config!: ConfigEditor;
   @Prop(String) public code!: string;
+
+  @Mutation(LOADING_CODE, { namespace: 'ide' })
+  public loadingCode!: (code: string) => void;
+  @Mutation(ERROR, { namespace: 'ide' })
+  public error!: (error: string) => void;
 
   public drawer: string | null = null;
   public menuCode: MenuGroup[] = [
@@ -118,6 +128,31 @@ export default class NavigationIDE extends Vue {
 
   @Emit()
   private closeOpenCodeModal() {
+    this.isOpen = false;
+  }
+
+  @Emit()
+  private clickOpenCodeModal(id: string) {
+    this.$apollo
+      .query({
+        query: CODE_BY_ID,
+        variables: {
+          _id: id,
+        },
+        fetchPolicy: 'network-only',
+      })
+      .then((result: ApolloQueryResult<CodeById>) => {
+        if (!result.errors) {
+          this.loadingCode(result.data.codeById.code);
+        } else {
+          this.error(result.errors[0].message);
+        }
+      })
+      .catch((err: Error) => {
+        if (err.stack) {
+          this.error(err.stack);
+        }
+      });
     this.isOpen = false;
   }
 

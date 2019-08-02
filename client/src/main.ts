@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
-import AceEditor from 'vue-editor-ace';
+// @ts-ignore
 import Vuetify from 'vuetify/lib';
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
@@ -12,7 +12,6 @@ import apolloClient from './ApolloClient';
 Vue.config.productionTip = false;
 
 Vue.use(VueApollo);
-Vue.use(AceEditor);
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
@@ -33,6 +32,7 @@ new Vue({
   apolloProvider,
   router,
   store,
+  // @ts-ignore
   vuetify: new Vuetify(opts),
   render: h => h(App),
 }).$mount('#app');

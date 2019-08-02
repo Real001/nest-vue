@@ -36,4 +36,8 @@ export class IdeService {
   async listCodeUser(user: string): Promise<Code[]> {
 		return await this.CodeModel.find({ user }).exec();
 	}
+
+  async findOneByIdCode(id: ID): Promise<Code> {
+    return await this.CodeModel.findById(id).exec();
+  }
 }

@@ -6,9 +6,10 @@ export type TypedGettersTree<TState, TGetters> = {
   [P in keyof TGetters]: (state: TState, getters: TGetters) => TGetters[P]
 };
 
-export interface SettingsIDEState {
+export interface IDEState {
   error: Error | null;
   settings: SettingsIDE;
+  code: string[];
 }
 
 export interface AuthState {

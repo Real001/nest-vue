@@ -1,16 +1,19 @@
 import { Module } from 'vuex';
-import { SettingsIDEState, RootState } from '@/types/state';
+import { IDEState, RootState } from '@/types/state';
 import getters from './getters';
+import mutations from './mutation';
 
-const state: SettingsIDEState = {
+const state: IDEState = {
   settings: {
     language: 'javascript',
   },
   error: null,
+  code: [],
 };
 
 export default {
   namespaced: true,
   state,
   getters,
-} as Module<SettingsIDEState, RootState>;
+  mutations,
+} as Module<IDEState, RootState>;

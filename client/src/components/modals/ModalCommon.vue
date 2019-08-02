@@ -11,10 +11,10 @@
       </v-container>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" flat="flat" @click="close">
+        <v-btn color="green darken-1" @click="close">
           Cancel
         </v-btn>
-        <v-btn color="green darken-1" flat="flat" @click="click">
+        <v-btn color="green darken-1" @click="clickOk" :disabled="disabled">
           {{ clickTitle }}
         </v-btn>
       </v-card-actions>
@@ -27,9 +27,10 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { MenuGroup } from '@/types/models';
 
 @Component
-export default class OpenCodeModal extends Vue {
+export default class ModalCommon extends Vue {
   @Prop() public title!: string;
   @Prop() public clickTitle!: string;
+  @Prop({ type: Boolean, default: () => false }) disabled!: string;
   @Prop({ type: Boolean, default: () => false }) public dialog!: boolean;
   @Prop({ default: () => 600 }) public width!: number;
 
@@ -39,7 +40,7 @@ export default class OpenCodeModal extends Vue {
   }
 
   @Emit()
-  private click() {
+  public clickOk() {
     /* */
   }
 }

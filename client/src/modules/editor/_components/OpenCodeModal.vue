@@ -1,11 +1,18 @@
 <template>
-  <modal title="Open is" clickTitle="open" :dialog="dialog" @close="close">
+  <modal-common
+    title="Open is"
+    clickTitle="open"
+    :dialog="dialog"
+    @close="close"
+    @click-ok="clickOk(item)"
+    :disabled="!item"
+  >
     <v-card item class="mx-auto">
-      <v-list shaped>
-        <list-item-two :items="itemsUpdate" />
+      <v-list>
+        <list-item-two :items="itemsUpdate" @change="change" />
       </v-list>
     </v-card>
-  </modal>
+  </modal-common>
 </template>
 
 <script lang="ts">
@@ -14,12 +21,14 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import { ListCode } from '@/types/models';
 import ListItemTwo from '@/components/lists/ListItemTwo.vue';
-import Modal from '@/components/modals/Modal.vue';
+import ModalCommon from '@/components/modals/ModalCommon.vue';
 
-@Component({ components: { ListItemTwo, Modal } })
+@Component({ components: { ListItemTwo, ModalCommon } })
 export default class OpenCodeModal extends Vue {
   @Prop() public items!: ListCode[];
   @Prop() public dialog!: boolean;
+
+  private item: string = '';
 
   public dateUpdated(date: Date) {
     TimeAgo.addLocale(en);
@@ -40,6 +49,16 @@ export default class OpenCodeModal extends Vue {
   @Emit()
   private close() {
     /* */
+  }
+
+  @Emit()
+  private change(index: number) {
+    this.item = this.items[index]._id;
+  }
+
+  @Emit()
+  private clickOk(item: string) {
+    return item;
   }
 }
 </script>

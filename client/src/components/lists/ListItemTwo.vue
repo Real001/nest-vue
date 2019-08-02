@@ -1,13 +1,13 @@
 <template>
-  <v-list-item-group v-model="item">
-    <v-list-item v-for="item in items" :key="item.key" @click="click" dark>
-      <v-list-item-icon>
+  <v-list-item-group @change="change">
+    <v-list-item v-for="item in items" :key="item.key" dark>
+      <v-list-item-action>
         <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-      </v-list-item-icon>
+      </v-list-item-action>
 
       <v-list-item-content>
         <v-list-item-title>{{ item.title }}</v-list-item-title>
-        <v-list-item-sub-title>{{ item.subtitle }}</v-list-item-sub-title>
+        <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-action>
@@ -22,15 +22,13 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { ListItems } from '@/types/models';
+import { EventDom } from '@/types/events';
 
 @Component
-export default class Listitem extends Vue {
-  @Prop({ type: String }) public icon!: string;
-  @Prop({ type: String }) public title!: string;
-  @Prop({ type: String }) public text!: string;
-  @Prop(Object) public items!: ListItems;
+export default class ListItem extends Vue {
+  @Prop(Array) public items!: ListItems[];
 
   @Emit()
-  public click() {}
+  private change() {}
 }
 </script>

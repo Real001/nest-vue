@@ -2665,7 +2665,7 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-brace@^0.11.1:
+brace@^0.11.0, brace@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/brace/-/brace-0.11.1.tgz#4896fcc9d544eef45f4bb7660db320d3b379fe58"
   integrity sha1-SJb8ydVE7vRfS7dmDbMg07N5/lg=
@@ -11182,7 +11182,7 @@ source-map-support@^0.5.6:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
 
-source-map-support@~0.5.6:
+source-map-support@~0.5.10:
   version "0.5.13"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.13.tgz#31b24a9c2e73c2de85066c0feb7d44767ed52932"
   integrity sha512-SHSKFHadjVA5oR4PPqhtAVdcBWwRYVd6g6cAXnIbRiIwc2EhPrTuKUBdSLvlEKyIP3GCf89fltvcZiP9MMFA1w==
@@ -11755,14 +11755,14 @@ terser-webpack-plugin@^1.1.0, terser-webpack-plugin@^1.2.1:
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
 
-terser@3.14.1, terser@^3.16.1:
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-3.14.1.tgz#cc4764014af570bc79c79742358bd46926018a32"
-  integrity sha512-NSo3E99QDbYSMeJaEk9YW2lTg3qS9V0aKGlb+PlOrei1X02r1wSBHCNX/O+yeTRFSWPKPIGj6MqvvdqV4rnVGw==
+terser@^3.16.1:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.17.0.tgz#f88ffbeda0deb5637f9d24b0da66f4e15ab10cb2"
+  integrity sha512-/FQzzPJmCpjAH9Xvk2paiWrFq+5M6aVOf+2KRbwhByISDX/EujxsK+BAvrhb6H+2rtrLCHK9N01wO014vrIwVQ==
   dependencies:
-    commander "~2.17.1"
+    commander "^2.19.0"
     source-map "~0.6.1"
-    source-map-support "~0.5.6"
+    source-map-support "~0.5.10"
 
 test-exclude@^4.2.1:
   version "4.2.3"
@@ -12523,11 +12523,6 @@ vue-cli-plugin-apollo@^0.19.1:
     subscriptions-transport-ws "^0.9.15"
     ts-node "^7.0.1"
 
-vue-cli-plugin-vuetify@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.npm.taobao.org/vue-cli-plugin-vuetify/download/vue-cli-plugin-vuetify-0.6.1.tgz#4fe0b7322a90a9c9f0aff2e18fd9249088b33080"
-  integrity sha1-T+C3MiqQqcnwr/Lhj9kkkIizMIA=
-
 vue-editor-ace@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vue-editor-ace/-/vue-editor-ace-1.0.0.tgz#2eced4701e6f95e5baf8b9f9f2cfa29454f76e72"
@@ -12653,6 +12648,13 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue2-brace-editor@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue2-brace-editor/-/vue2-brace-editor-2.0.2.tgz#d9cd06f201c3e7af8382fd14a3eb8c2c49971436"
+  integrity sha512-ADJo1dccmIjq3ZejUNFJT/GpTQV5+TPOkC7xArBbVooVSjL8NOgRbqQ1Ix1LEW2S0hgy1y2ac8VHpZZdV4hjug==
+  dependencies:
+    brace "^0.11.0"
 
 vue@^2.5.17, vue@^2.6.8:
   version "2.6.8"

@@ -19,26 +19,66 @@
         <v-content class="editor-block">
           <v-container fluid fill-height>
             <v-layout>
-              <ace-editor v-model="code" :config="data" />
+              <ace-editor
+                :mode="data.settings.lang"
+                :theme="data.settings.theme"
+                :splits="4"
+                name="brace"
+                :fontSize="14"
+                :value="getCode[getCode.length - 1]"
+                width="100%"
+                height="100%"
+                enableBasicAutocompletion
+                enableLiveAutocompletion
+              />
             </v-layout>
           </v-container>
         </v-content>
       </template>
     </ApolloQuery>
+    <v-snackbar v-model="snackbar" color="red" top>
+      {{ er }}
+      <v-btn dark text @click="closeSnackbar">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { Getter } from 'vuex-class';
-import { ConfigEditor, User } from '@/types/models';
+import { Vue, Component, Emit, Watch } from 'vue-property-decorator';
+import { Getter, Mutation } from 'vuex-class';
+import brace from 'brace';
+import { Ace as AceEditor } from 'vue2-brace-editor';
+import 'brace/mode/javascript';
+import 'brace/theme/monokai';
+import { User } from '@/types/models';
 import NavigationIDE from './_components/NavigationIDE.vue';
+import { ERROR } from '@/constants/mutation-types';
 
-@Component({ components: { NavigationIDE } })
+@Component({ components: { NavigationIDE, AceEditor } })
 export default class EditorPage extends Vue {
   @Getter('user', { namespace: 'auth' }) public user!: User;
+  @Getter('error', { namespace: 'ide' }) public error!: string;
+  @Getter('getCode', { namespace: 'ide' }) public getCode!: string[];
 
-  private code: string = 'jjkhjl';
+  @Mutation(ERROR, { namespace: 'ide' })
+  public mutationError!: (error: null) => void;
+
+  private snackbar: boolean = false;
+
+  @Emit()
+  private closeSnackbar() {
+    this.snackbar = false;
+    this.mutationError(null);
+  }
+
+  public get er() {
+    if (this.error) {
+      this.snackbar = true;
+    }
+    return this.error;
+  }
 }
 </script>
 

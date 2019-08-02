@@ -82,3 +82,10 @@ export interface ListCode {
   lang: string;
   updatedAt: Date;
 }
+
+export interface Code {
+  _id: string;
+  name: string;
+  lang: string;
+  code: string;
+}
