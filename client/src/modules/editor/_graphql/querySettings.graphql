@@ -1,5 +1,0 @@
-query settingsIde {
-  settingsIde {
-    language
-  }
-}

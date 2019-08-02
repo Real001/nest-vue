@@ -13,3 +13,8 @@ export interface User extends Document {
     readonly password: string;
     hash: string;
 }
+
+export interface LoginData {
+  readonly email: string;
+  readonly password: string;
+}

@@ -26,7 +26,7 @@ export class UserService {
       const accessToken = this.jwtService.sign(payload);
       return {
         expires_in: 3600,
-        access_token: accessToken,
+        code_student_token: accessToken,
         status: 200
       }
     } catch (e) {
@@ -52,7 +52,7 @@ export class UserService {
   }
 
 	async findOneById(id: ID): Promise<User> {
-		return await this.UserModel.findById(id).exec();
+		return await this.UserModel.findById(id, { hash: 0 }).exec();
 	}
 	
 	async findByEmail(email: string): Promise<User> {

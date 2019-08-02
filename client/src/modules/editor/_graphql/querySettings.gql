@@ -1,0 +1,6 @@
+query settingsIde($user: String!) {
+  settings(user: $user) {
+    lang
+    theme
+  }
+}

@@ -1,7 +1,7 @@
 export type ID = string;
 
 export interface User {
-  id?: ID;
+  _id?: ID;
   firstName: string;
   lastName: string;
   email: string;
@@ -20,19 +20,21 @@ export interface LoginData {
 }
 
 export interface ConfigEditor {
-  lang?: string;
-  theme?: string;
-  readOnly?: boolean;
-  autoCompletion?: boolean;
-  showPrintMargin?: boolean;
-  useWrapMode?: boolean;
-  useSoftTabs?: boolean;
-  tabSize?: number;
-  useVim?: boolean;
-  useEmmet?: boolean;
-  useBeautifyCode?: boolean;
-  cursorPosition?: CursorPosotion;
-  pagePosition?: number;
+  settings: {
+    lang: string;
+    theme?: string;
+    readOnly?: boolean;
+    autoCompletion?: boolean;
+    showPrintMargin?: boolean;
+    useWrapMode?: boolean;
+    useSoftTabs?: boolean;
+    tabSize?: number;
+    useVim?: boolean;
+    useEmmet?: boolean;
+    useBeautifyCode?: boolean;
+    cursorPosition?: CursorPosotion;
+    pagePosition?: number;
+  };
 }
 
 export interface MenuGroup {
@@ -40,6 +42,8 @@ export interface MenuGroup {
   title: string;
   active?: boolean;
   items?: MenuGroup[];
+  click?: () => void;
+  key?: string;
 }
 
 export interface Select {
@@ -58,8 +62,30 @@ export interface SettingsIDE {
 
 export interface LoginResponse {
   createUser: {
-    access_token: string;
+    code_student_token: string;
     expires_in: number;
     status: number;
   };
+}
+
+export interface ListItems {
+  title: string;
+  iconClass?: string;
+  icon: string;
+  subtitle: string;
+  key: string;
+}
+
+export interface ListCode {
+  _id: string;
+  name: string;
+  lang: string;
+  updatedAt: Date;
+}
+
+export interface Code {
+  _id: string;
+  name: string;
+  lang: string;
+  code: string;
 }

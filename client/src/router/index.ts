@@ -14,7 +14,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: { name: 'login' },
+      redirect: { name: 'ide' },
     },
     {
       path: '/register',
@@ -39,7 +39,7 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.isAuth)) {
-    if (cookie.get('access_token') == null) {
+    if (cookie.get('code_student_token') == null) {
       next({
         path: '/login',
         params: { nextUrl: to.fullPath },

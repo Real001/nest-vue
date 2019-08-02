@@ -1,0 +1,5 @@
+mutation SaveCode($code: String!, $user: String!, $name: String!, $lang: String!) {
+  saveCode(code: $code, idUser: $user, name: $name, lang: $lang) {
+    _id
+  }
+}

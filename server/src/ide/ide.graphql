@@ -1,0 +1,36 @@
+type Query {
+  settings(user: String!): Settings
+  listCodeUser(user: String!): [Code]
+  codeById(_id: String!): Code
+}
+
+type Ide {
+  settings(user: String!): Settings
+}
+
+type Settings {
+  lang: String!
+  theme: String!
+}
+
+type Code {
+  _id: String
+  code: String!
+  user: String!
+  name: String!
+  result: String
+  lang: String!
+  createdAt: Date
+  updatedAt: Date
+}
+
+type Mutation {
+  updateSettings(settings: SettingsInput!, idUser: String!): Settings
+  saveCode(code: String!, idUser: String!, name: String!, lang: String!): Code
+}
+
+input SettingsInput {
+  lang: String!
+  theme: String!
+}
+

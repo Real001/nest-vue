@@ -1,1 +1,1 @@
-declare module 'vue-editor-ace';
+declare module 'vue2-brace-editor';

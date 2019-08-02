@@ -1,0 +1,9 @@
+query codeById($_id: String!) {
+  codeById(_id: $_id) {
+    _id
+    name
+    lang
+    updatedAt
+    code
+  }
+}
