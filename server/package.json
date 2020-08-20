@@ -28,7 +28,7 @@
     "@nestjs/mongoose": "^5.2.2",
     "@nestjs/passport": "^6.1.0",
     "apollo-server-express": "^2.4.8",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.4",
     "dotenv": "^6.2.0",
     "faker": "^4.1.0",
