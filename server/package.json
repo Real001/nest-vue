@@ -36,7 +36,7 @@
     "graphql-tools": "^4.0.4",
     "moment-timezone": "^0.5.26",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.7.5",
     "nest-winston": "^1.0.4",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.12",
